@@ -28,8 +28,11 @@ Route::prefix('/admin')->group(function () {
     Route::prefix('cms')->group(function () {
         Route::get('/', [ADC::class, 'cmsIndex'])->name('admin.cms.index');
         Route::get('/create', [ADC::class, 'cmsCreate'])->name('admin.cms.create');
+        Route::get('/edit/{id}', [ADC::class, 'cmsEdit'])->name('admin.cms.edit');
         // Resource
         Route::post('/store', [ADC::class, 'cmsStore'])->name('admin.cms.store');
+        Route::post('/remove', [ADC::class, 'cmsStore'])->name('admin.cms.remove');
+        Route::post('/update', [ADC::class, 'cmsUpdate'])->name('admin.cms.update');
+        Route::get('/json', [ADC::class, 'cmsJson']);
     });
 });
-
