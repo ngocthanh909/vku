@@ -130,7 +130,14 @@
                                     <input id="MetaKeyword" name="MetaKeyword" type="text" placeholder="Meta Keyword" class="form-control input-md" required1="">
                                 </div>
                             </div>
-
+                            <!-- Hashtag-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="MetaKeyword">Tags</label>
+                                <div class="col-md-12">
+                                    <input id="Tags" name="Tags" type="text" placeholder="Ví dụ: ozawa,mikami" class="form-control input-md" required1="">
+                                    <small>Tag viết liền không dấu, phân tách bởi dấu phảy (,)</small>
+                                </div>
+                            </div>
                             <!-- Text input-->
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="MetaDescription">Meta Description</label>

@@ -35,28 +35,11 @@ class AdminController extends Controller
         return $qr;
     }
     function cmsStore(Request $request){
-        // dd($this->encodePlace($request->Place));
-        // $values = $request->validate(
-        //     [      
-        //         "Avatar" => "required|max:255",
-        //         "Title_en" => "required|max:255",
-        //         "SimpleContent_vi" => "required|max:255",
-        //         "SimpleContent_en" => "required|max:255",
-        //         "Content_vi" => "required|max:65000",
-        //         "Content_en" => "required|max:65000",
-        //         "MetaTitle" => "required|max:255",
-        //         "MetaKeyword" => "required|max:255",
-        //         "MetaDescription" => "required|max:255",
-        //         "Slug_vi" => "required|max:255",
-        //         "Slug_en" => "required|max:255",
-        //         "CmsCategory" => "required"
-        //     ]
-        // );
         $values =
             [      
                 "Avatar" => $this->fileUpload($request, 'Avatar', 'PostImage', date('m-d-Y_hia')),
                 "Title_en" => $request->Title_en,
-                "Title_vi" => $request->SimpleContent_vi,
+                "Title_vi" => $request->Title_vi,
                 "SimpleContent_vi" => $request->SimpleContent_vi,
                 "SimpleContent_en" => $request->SimpleContent_en,
                 "Content_vi" => $request->Content_vi,
@@ -67,14 +50,63 @@ class AdminController extends Controller
                 "Slug_vi" => $request->Slug_vi,
                 "Slug_en" => $request->Slug_en,
                 "CategoryID" => $request->CategoryID,
-                "Place" => $this->encodePlace($request->Place)
+                "Place" => $this->encodePlace($request->Place),
+                "Tags" => $request->Tags,
             ];
-        var_dump(DB::table('cms')->insert($values));
+        $insertedRow = DB::table('cms')->insertGetId($values);
+        if($insertedRow != null && $insertedRow != 0){
+            $this->solveTags($values['Tags'], $insertedRow);
+        }
     }
     function cmsEdit(Request $request, $id){
         $cms = $this->cmsGetSingle($id);
+        // dd($cms->Place);
         return view("admin.Cms.update")->with('cms', $cms);
     }
+    function cmsUpdate(Request $request, $id){
+        $values =
+            [      
+                "Title_en" => $request->Title_en,
+                "Title_vi" => $request->Title_vi,
+                "SimpleContent_vi" => $request->SimpleContent_vi,
+                "SimpleContent_en" => $request->SimpleContent_en,
+                "Content_vi" => $request->Content_vi,
+                "Content_en" => $request->Content_en,
+                "MetaTitle" => $request->MetaTitle,
+                "MetaKeyword" => $request->MetaKeyword,
+                "MetaDescription" => $request->MetaDescription,
+                "Slug_vi" => $request->Slug_vi,
+                "Slug_en" => $request->Slug_en,
+                "CategoryID" => $request->CategoryID,
+                "Place" => $this->encodePlace($request->Place),
+                "Tags" => $request->Tags,
+            ];
+            if($request->File('Avatar') != null){
+                $values["Avatar"] = $this->fileUpload($request, 'Avatar', 'PostImage', date('m-d-Y_hia'));
+            }
+            // dd($values);
+            var_dump(DB::table('cms')->where('CmsID', $id)->update($values));
+    }
+    /*
+        TAG ZONE
+        https://github.com/PhuongNamCorpsIntern/workspace/issues/15
+    */
+    function solveTags($tags, $CmsID) {
+        $tagsArray = explode(',', $tags);
+        foreach ($tagsArray as $tag) {
+            $tags_id = DB::table('tags')->select('TagID')->where('Name', $tag)->first();
+            if($tags_id != null){
+                $qr = DB::table('cms_tags')->insert(['CmsID' => $CmsID, 'TagID' => $tags_id]);
+            } else {
+                $tags_id = DB::table('tags')->insertGetId(['Name' => $tag]);
+                $qr = DB::table('cms_tags')->insert(['CmsID' => $CmsID, 'TagID' => $tags_id]);
+            }
+        }
+        return true;
+    }
+
+
+
     function cmsJson(){
         $db = DB::table('cms')->select('Place')->where('CmsID', 1123)->first();
         dd($db->Place);

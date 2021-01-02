@@ -1,7 +1,7 @@
 @extends('admin.layout.master')
 @section('title', 'Tạo bài viết')
 @section('body')
-<form method="post" action="{{route('admin.cms.store')}}" enctype="multipart/form-data">
+<form method="post" action="{{route('admin.cms.update', ['id' => $cms->CmsID])}}" enctype="multipart/form-data">
     @csrf
     <div class="row mb-3">
         <div class="col-md-8"></div>
@@ -22,10 +22,6 @@
                             <label class="col-md-4 control-label" for="Title_en">Tiêu đề</label>
                             <div class="col">
                                 <input id="Title_en" name="Title_vi" type="text" placeholder="Tiêu đề" class="form-control input-md" required1="" value="{{$cms->Title_vi}}">
-                                @php
-                                var_dump($cms);
-                                @endphp
-
                             </div>
                         </div>
                         <!-- Text input-->
@@ -148,7 +144,14 @@
 
                                 </div>
                             </div>
-
+                            <!-- Hashtag-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="MetaKeyword">Tags</label>
+                                <div class="col-md-12">
+                                    <input id="Tags" name="Tags" type="text" placeholder="Ví dụ: ozawa,mikami" class="form-control input-md" required1="" value="{{$cms->Tags}}">
+                                    <small>Tag viết liền không dấu, phân tách bởi dấu phảy (,)</small>
+                                </div>
+                            </div>
                             <!-- Text input-->
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="Slug_vi">Slug tiếng Việt</label>
@@ -201,6 +204,5 @@
 <script>
     var upload = new FileUploadWithPreview("myUniqueUploadId");
     upload.cachedFileArray;
-
 </script>
 @endsection

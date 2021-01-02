@@ -1,1 +1,3 @@
 https://github.com/promosis/file-upload-with-preview
+Tags system
+https://github.com/PhuongNamCorpsIntern/workspace/issues/15

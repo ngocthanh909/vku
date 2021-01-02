@@ -32,7 +32,7 @@ Route::prefix('/admin')->group(function () {
         // Resource
         Route::post('/store', [ADC::class, 'cmsStore'])->name('admin.cms.store');
         Route::post('/remove', [ADC::class, 'cmsStore'])->name('admin.cms.remove');
-        Route::post('/update', [ADC::class, 'cmsUpdate'])->name('admin.cms.update');
+        Route::post('/update/{id}', [ADC::class, 'cmsUpdate'])->name('admin.cms.update');
         Route::get('/json', [ADC::class, 'cmsJson']);
     });
 });
