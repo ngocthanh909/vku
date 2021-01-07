@@ -26,6 +26,11 @@ class AdminController extends Controller
     function dashboard(){
         return view('admin.dashboard.index');
     }
+    function cmsIndex(){
+        $qr = DB::table('cms')->paginate(20);
+        $qr->Place = $this->decodePlaceQuery($qr);
+        return view('admin.Cms.index')->with('cmss', $qr);
+    }
     function cmsCreate(){
         return view('admin.Cms.create');
     }
@@ -87,6 +92,10 @@ class AdminController extends Controller
             // dd($values);
             var_dump(DB::table('cms')->where('CmsID', $id)->update($values));
     }
+    function cmsDelete(Request $request, $id){
+        $response = DB::table('cms')->where('CmsID', $id)->delete();
+        var_dump($response);
+    }
     /*
         TAG ZONE
         https://github.com/PhuongNamCorpsIntern/workspace/issues/15
@@ -121,6 +130,12 @@ class AdminController extends Controller
     function decodePlace($jsonIn){
         $placeIn = json_decode($jsonIn);
         return $placeIn;
+    }
+    function decodePlaceQuery($qrs){
+        foreach($qrs as $key => $qr){
+            $qr->Place = json_decode($qr->Place);
+        }
+        return $qrs;
     }
     // 
     function cmsCategoryIndex(){

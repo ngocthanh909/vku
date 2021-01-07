@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController as ADC;
+use App\Http\Controllers\UserController as User;
 use Illuminate\Support\Facades\DB;
 
 /*
@@ -15,10 +16,6 @@ use Illuminate\Support\Facades\DB;
 |
 */
 
-Route::get('/', function () {
-    return view('upload');
-});
-Route::view('/', 'admin.layout.master');
 
 Route::prefix('/admin')->group(function () {
     Route::prefix('cmscategory')->group(function () {
@@ -29,10 +26,15 @@ Route::prefix('/admin')->group(function () {
         Route::get('/', [ADC::class, 'cmsIndex'])->name('admin.cms.index');
         Route::get('/create', [ADC::class, 'cmsCreate'])->name('admin.cms.create');
         Route::get('/edit/{id}', [ADC::class, 'cmsEdit'])->name('admin.cms.edit');
+        
         // Resource
         Route::post('/store', [ADC::class, 'cmsStore'])->name('admin.cms.store');
         Route::post('/remove', [ADC::class, 'cmsStore'])->name('admin.cms.remove');
         Route::post('/update/{id}', [ADC::class, 'cmsUpdate'])->name('admin.cms.update');
+        Route::get('/delete/{id}', [ADC::class, 'cmsDelete'])->name('admin.cms.delete');
         Route::get('/json', [ADC::class, 'cmsJson']);
     });
+});
+Route::prefix('/')->group(function(){
+    Route::get('/', [User::class, 'index']);
 });

@@ -1,0 +1,28 @@
+vku.udn.vn/thanhnien/........................
+vku.udn.vn/daotao/........................
+
+thanhnien.vku.udn.vn/........................
+
+controller getPost();
+
+    vku.. -> key 1
+    thanhnien.. -> key 2
+
+
+
+
+1 admin ->  1 xoá,
+            2 hoàn thiện category
+            3 Login
+            4 Phân quyền
+
+
+            Album ảnh
+
+2 User side
+            1. UI HOMEPAGE, ĐƠN VỊ
+            2. subdomain, show nội dung 
+                
+                domain 
+                    dotmain.test
+                    
