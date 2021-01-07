@@ -35,6 +35,10 @@ Route::prefix('/admin')->group(function () {
         Route::get('/json', [ADC::class, 'cmsJson']);
     });
 });
-Route::prefix('/')->group(function(){
+// Route::prefix('/')->group(function(){
+//     Route::get('/', [User::class, 'index']);
+// });
+
+Route::domain('{sub}.vkudemo.test')->group(function ($sub) {
     Route::get('/', [User::class, 'index']);
 });
