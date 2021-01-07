@@ -6,7 +6,7 @@
     <div class="col-md-5">
         <div class="default-block">
             <div class="title title-left-red mb-3">
-                tin tức - sự kiện
+                tin tức - sự kiện nổi bật
             </div>
             <ul class="newevent-container">
                 <li class="newevent-item">
@@ -47,9 +47,34 @@
                 </li>
             </ul>
         </div>
+        <div class="default-block mt-3 mb-3">
+            <div class="title title-left-blue  mb-3">
+                tin tức - sự kiện khác
+            </div>
+            <ul class="newevent-container">
+                <li class="otherev-item">
+                    <div class="otherev-img">
+                        <img src="http://vku.udn.vn/uploads/2021/01/03/1609683523_1.jpg" />
+                    </div>
+                    <div class="otherev-link"><a href="#">VKU: 01 NĂM THÀNH LẬP - 10 THÀNH QUẢ NỔI BẬT (03/01/2020-03/01/2021)</a></div>
+                </li>
+                <li class="otherev-item">
+                    <div class="otherev-img">
+                        <img src="http://vku.udn.vn/uploads/2021/01/03/1609683523_1.jpg" />
+                    </div>
+                    <div class="otherev-link"><a href="#">VKU: 01 NĂM THÀNH LẬP - 10 THÀNH QUẢ NỔI BẬT (03/01/2020-03/01/2021)</a></div>
+                </li>
+                <li class="otherev-item">
+                    <div class="otherev-img">
+                        <img src="http://vku.udn.vn/uploads/2021/01/03/1609683523_1.jpg" />
+                    </div>
+                    <div class="otherev-link"><a href="#">VKU: 01 NĂM THÀNH LẬP - 10 THÀNH QUẢ NỔI BẬT (03/01/2020-03/01/2021)</a></div>
+                </li>
+            </ul>
+        </div>
     </div>
     <div class="col-md-4">
-        <div class="default-block">
+        <div class="default-block mb-3">
             <div class="title title-left-blue  mb-3">
                 thông báo
             </div>
@@ -86,6 +111,7 @@
                 <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fvku.udn.vn&tabs=timeline&width=500&height=700&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=947748449088802" width="500" height="700" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
             </div>
         </div>
+
     </div>
     <div class="col-md-3">
         <div class="default-block">

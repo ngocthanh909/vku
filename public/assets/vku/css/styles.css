@@ -146,7 +146,39 @@ a:hover {
         -webkit-box-orient: vertical;
     }
 }
+/* other event */
+.otherev-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 10px;
+}
+.otherev-item:hover {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
 
+.otherev-link {
+    padding-left: 10px;
+    text-align: justify;
+    margin-bottom: 0.5rem;
+}
+
+.otherev-link a {
+    font-size: 18px;
+    font-weight: 600;
+}
+.otherev-img {
+    width: 150px;
+    height: auto;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+}
+.otherev-img img{
+    width: 100%;
+    height: auto;
+}
 /* annou */
 .annou-item {
     display: flex;
@@ -198,7 +230,7 @@ a:hover {
     position: relative;
     overflow: hidden;
     width: 100%;
-    height: 200px;
+    height: 430px;
 }
 .sponsor-item {
     display: flex;
