@@ -29,6 +29,36 @@ a:hover {
     padding: 1.5rem 1.5rem;
 }
 
+/* Header */
+.megamenu {
+    position: static;
+}
+.megamneu:hover >.megamenu .dropdown-menu {
+    display:block;
+}
+.megamenu .dropdown-menu {
+    background: none;
+    border: none;
+    width: 100%;
+}
+.custom-logo {
+    height: 2rem;
+    width: auto;
+}
+.header-logo {
+    height: 4rem;
+    width: auto;
+}
+.header-wrapper {
+    padding: 10px 5px;
+    /* background-color: #fff; */
+}
+.navbar {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    border-bottom: 3px solid #d90905;
+    margin-bottom: 1rem;
+    /* border-top: 3px solid #f89f3f; */
+}
 /* 
     HOME CSS
 */
@@ -146,6 +176,7 @@ a:hover {
         -webkit-box-orient: vertical;
     }
 }
+
 /* other event */
 .otherev-item {
     display: flex;
@@ -154,6 +185,7 @@ a:hover {
     margin-bottom: 1rem;
     padding: 10px;
 }
+
 .otherev-item:hover {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
@@ -168,6 +200,7 @@ a:hover {
     font-size: 18px;
     font-weight: 600;
 }
+
 .otherev-img {
     width: 150px;
     height: auto;
@@ -175,10 +208,12 @@ a:hover {
     font-weight: 600;
     text-align: center;
 }
-.otherev-img img{
+
+.otherev-img img {
     width: 100%;
     height: auto;
 }
+
 /* annou */
 .annou-item {
     display: flex;
@@ -204,15 +239,17 @@ a:hover {
     font-weight: 600;
     text-align: center;
 }
-.annou-time .dm{
+
+.annou-time .dm {
     width: 100%;
     height: auto;
     color: #011b67;
     border: 1px solid #011b67;
     border-bottom: none;
-    
+
 }
-.annou-time .y{
+
+.annou-time .y {
     width: 100%;
     height: auto;
     color: white;
@@ -220,29 +257,34 @@ a:hover {
     border: 1px solid #011b67;
     border-bottom: none;
 }
+
 .social-media {
     width: 100%;
     height: auto;
     display: flex;
     justify-content: center;
 }
+
 .sponsor-wrapper {
     position: relative;
     overflow: hidden;
     width: 100%;
     height: 430px;
 }
+
 .sponsor-item {
     display: flex;
     flex-direction: row;
     width: 100%;
 }
+
 .sponsor-single {
     width: 50%;
     height: auto;
     padding: 10px;
 }
-.sponsor-single img{
+
+.sponsor-single img {
     width: 100%;
     height: auto;
 }

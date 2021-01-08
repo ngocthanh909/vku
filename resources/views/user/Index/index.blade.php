@@ -161,9 +161,6 @@
 <script src="assets/vku/js/jquery.marquee.js"></script>
 <script>
     $(function() {
-
-
-
         $('#demo').marquee({
 
             // enable the plugin
@@ -199,4 +196,3 @@
 
 </style>
 @endsection
-{{$sub}}
