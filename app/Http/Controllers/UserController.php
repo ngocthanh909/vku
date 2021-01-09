@@ -25,11 +25,12 @@ class UserController extends Controller
     
     function index(){
         $query="%$this->department%";
-        echo $query;
+        // echo $query;
         $headnews = DB::table('cms')->where('Pin', 1)->where('Place', 'LIKE', $query)->limit(5)->get();
         $othernews = DB::table('cms')->where('Place', 'LIKE', $query)->limit(5)->orderBy('PostTime', 'desc')->get();
+        $carousel = DB::table('cms')->where('Event', 1)->where('Place', 'LIKE', $query)->limit(5)->get();
         $annous = DB::table('cms')->join('cms_categories', 'cms.CategoryID', '=', 'cms_categories.CategoryID')->limit(10)->get();
-        return view('user.Index.index')->with('sub', $this->department)->with('headnews', $headnews)->with('othernews', $othernews)->with('annous', $annous);
+        return view('user.Index.index')->with('sub', $this->department)->with('headnews', $headnews)->with('othernews', $othernews)->with('annous', $annous)->with('carousel', $carousel);
 
     }
     // Show post
@@ -46,5 +47,14 @@ class UserController extends Controller
         $allNews = DB::table('cms')->where('Place', 'LIKE', $query)->orderBy('PostTime', 'desc')->paginate(20);
         $headnews = DB::table('cms')->where('Pin', 1)->where('Place', 'LIKE', $query)->paginate(20);
         return view('user.browse.index')->with('allNews', $allNews)->with('headnews', $headnews);
+    }
+
+    function crawler(){
+        $listQuereFile = DB::table('cms')->where('Avatar','!=', '' )->get('Avatar');
+        foreach($listQuereFile as $quereFile){
+            // $file = file_get_contents("http://vku.udn.vn/uploads/" . $quereFile->Avatar);
+            $file = file_get_contents("http://vku.udn.vn/uploads/2020/07/16/109656929_175310907362215_892481267078694723_o%20(1).jpg");
+        };
+        dd($listQuereFile);
     }
 }

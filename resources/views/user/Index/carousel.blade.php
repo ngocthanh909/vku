@@ -4,14 +4,12 @@
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <div class="card bg-dark text-white">
-                        <img class="card-img img-fluid" src="http://vku.udn.vn/uploads/2020/11/18/1605709473_H%C3%ACnh%202.jpg" alt="">
+                        <img class="card-img img-fluid" src="{{$carousel[0]->Avatar}}" alt="">
                         <div class="card-img-overlay d-flex linkfeat">
                             <a href="http://makro.id/review-gsp-amerika-ingin-perdagangan-saling-menguntungkan" class="align-self-end">
                                 <span class="badge">f</span>
-                                <h4 class="card-title">Review GSP: Amerika Ingin Perdagangan Saling Menguntungkan</h4>
-                                <p class="textfeat" style="display: none;">makro.id – Duta Besar Amerika Serikat untuk Indonesia Joseph R. Donovan menegaskan, langkah pemerintah Amerika Serikat meninjau ulang pemberian Generalized System od Preferenes (GSP) akan menguntungkan kedua belah pihak.
-
-                                    Menurut Donovan,</p>
+                                <h4 class="card-title">{{$carousel[0]->Title_vi}}</h4>
+                                <p class="textfeat" style="display: none;">{{$carousel[0]->SimpleContent_vi}}</p>
                             </a>
                         </div>
                     </div>

@@ -139,10 +139,10 @@ class AdminController extends Controller
     }
     // 
     function cmsCategoryIndex(){
-        return view('admin.CmsCategory.index')->with('categories', $this->createNested($this->category));
+        return view('admin.CmsCategory.index')->with('categories', $this->createNested($this->category))->with('simpleCategories', DB::table('cms_categories')->paginate(20));
     }
     function cmsCategoryCreate(){
-        return view('admin.CmsCategory.index');
+        return view('admin.CmsCategory.create');
     }
     function categoryList(){
         return DB::table('cms_categories')->get();

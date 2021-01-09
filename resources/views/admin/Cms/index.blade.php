@@ -21,7 +21,7 @@
                         <div id="dataTable_filter" class="dataTables_filter"><label>Tìm: <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable"></label></div>
                     </div>
                     <div class="col-sm-12 col-md-4">
-                        <a href="#" class="btn btn-success btn-icon-split float-right">
+                        <a href="{{route('admin.cms.create')}}" class="btn btn-success btn-icon-split float-right">
                             <span class="icon text-white-50">
                                 <i class="fas fa-plus"></i>
                             </span>
