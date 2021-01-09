@@ -23,7 +23,7 @@
                         </div>
                     </div>
                     <div class="newevent-article">
-                        <div class="title-wrapper"><a class="title" href="#">{{$headnew->Title_vi}}</a></div>
+                        <div class="title-wrapper"><a class="title" href="{{route('postView', ['slug' => $headnew->Slug_vi])}}">{{$headnew->Title_vi}}</a></div>
                         <div class="description">{{$headnew->SimpleContent_vi}}</div>
                     </div>
                 </li>
@@ -40,7 +40,7 @@
                     <div class="otherev-img">
                         <img src="{{$othernew->Avatar}}" />
                     </div>
-                    <div class="otherev-link"><a href="#">{{$othernew->Title_vi}}</a></div>
+                    <div class="otherev-link"><a href="{{route('postView', ['slug' => $othernew->Slug_vi])}}">{{$othernew->Title_vi}}</a></div>
                 </li>
                 @endforeach
             </ul>
@@ -58,7 +58,7 @@
                         <div class="dm">{{date('m-d',strtotime($annou->PostTime))}}</div>
                         <div class="y">{{date('Y',strtotime($annou->PostTime))}}</div>
                     </div>
-                    <div class="annou-link"><a href="#">{{$annou->Title_vi}}</a></div>
+                    <div class="annou-link"><a href="{{route('postView', ['slug' => $annou->Slug_vi])}}">{{$annou->Title_vi}}</a></div>
                 </li>
                 @endforeach
             </ul>

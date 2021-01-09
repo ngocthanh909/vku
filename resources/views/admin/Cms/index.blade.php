@@ -126,7 +126,6 @@
         var b = document.getElementById('confirm');
         b.setAttribute("onclick", "window.location.href='" + link + "'");
     })
-
 </script>
 @endsection
 @section('custom_css')

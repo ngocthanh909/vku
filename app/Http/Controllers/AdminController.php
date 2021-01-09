@@ -57,6 +57,7 @@ class AdminController extends Controller
                 "CategoryID" => $request->CategoryID,
                 "Place" => $this->encodePlace($request->Place),
                 "Tags" => $request->Tags,
+                "PostTime" => date('Y-m-d H:i:s')
             ];
         $insertedRow = DB::table('cms')->insertGetId($values);
         if($insertedRow != null && $insertedRow != 0){
@@ -84,6 +85,7 @@ class AdminController extends Controller
                 "CategoryID" => $request->CategoryID,
                 "Place" => $this->encodePlace($request->Place),
                 "Tags" => $request->Tags,
+                "UpdateTime" => date('Y-m-d H:i:s')
             ];
             if($request->File('Avatar') != null){
                 $values["Avatar"] = $this->fileUpload($request, 'Avatar', 'PostImage', date('m-d-Y_hia'));
@@ -183,5 +185,9 @@ class AdminController extends Controller
             'Slug_en' => $request->Slug_en,
             'ParentID' => $request->CategoryID,
         ];
+    }
+    function userIndex(){
+        $users = DB::table('admin')->join('departments', 'admin.DepartmentID', '=',  'departments.DepartmentID')->paginate(20);
+        return view('admin.account.index')->with('users', $users);
     }
 }

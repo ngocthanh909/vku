@@ -17,7 +17,8 @@
                                             <option value="25">25</option>
                                             <option value="50">50</option>
                                             <option value="100">100</option>
-                                        </select> entries</label></div>
+                                        </select> entries</label>
+                                </div>
                             </div>
                             <div class="col-sm-12 col-md-4">
                                 <div id="dataTable_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable"></label></div>
@@ -36,34 +37,39 @@
                                 <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                     <thead>
                                         <tr role="row">
-                                            <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 79px;">Tên danh mục</th>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 119px;">Danh mục cha</th>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 57px;">Slug</th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 79px;">Tên người dùng</th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 119px;">Ngày tạo tài khoản</th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 57px;">Đơn vị</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 31px;">Thao tác</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 79px;">Tên danh mục</th>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 119px;">Danh mục cha</th>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 57px;">Slug</th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 79px;">Tên người dùng</th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 119px;">Ngày tạo tài khoản</th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 57px;">Đơn vị</th>
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 31px;">Thao tác</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
 
-                                        @foreach($simpleCategories as $key => $category)
+                                        @foreach($users as $key => $user)
                                         <tr role="row" class="odd">
-                                            <td class="sorting_1">{{$category->Name_vi}}</td>
-                                            <td>---</td>
-                                            <td>{{$category->Slug_vi}}</td>
+                                            <td class="sorting_1">{{$user->Username}}</td>
+                                            <td>{{$user->RegisterTime}}</td>
+                                            <td>{{$user->Name}}</td>
                                             <td>
-                                                <a href="{{route('admin.cmscategory.edit', ['id' => $category->CategoryID])}}" class="btn btn-primary btn-circle btn-sm">
-                                                    <i class="fas fa-edit"></i>
+                                                <a href="{{route('admin.user.edit', ['id' => $user->UserID])}}" class="btn btn-primary btn-circle btn-sm">
+                                                <i class="fas fa-edit"></i>
+                                                </a>
+                                                <a href="#confirmReset" class="btn btn-danger btn-circle btn-sm" data-toggle="modal" data-reset="{{route('admin.cmscategory.delete', ['id' => $category->CategoryID])}}">
+                                                    <i class="fas fa-redo-alt"></i></i>
                                                 </a>
                                                 <a href="#confirmDelete" class="btn btn-danger btn-circle btn-sm" data-toggle="modal" data-delete="{{route('admin.cmscategory.delete', ['id' => $category->CategoryID])}}">
                                                     <i class="fas fa-trash"></i>
                                                 </a>
+                                                
+                                                
                                             </td>
                                         </tr>
                                         @endforeach
@@ -78,7 +84,7 @@
                             </div>
                             <div class="col-sm-12 col-md-7">
                                 <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-                                    {{$simpleCategories->links()}}
+                                    {{$users->links()}}
                                 </div>
                             </div>
                         </div>
@@ -96,11 +102,29 @@
             <!-- Card Content - Collapse -->
             <div class="collapse show" id="cmsCategory">
                 <div class="card-body">
-                    <ol style="">
-                        @foreach ($categories as $category)
-                        @include('admin.CmsCategory.rescusiveList', ['category' => $category])
-                        @endforeach
-                    </ol>
+                    <form action="{{route('admin.user.store')}}" method="post">
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="Title_en">Tiêu đề</label>
+                            <div class="col">
+                                <input id="Title_vi" name="Title_vi" type="text" placeholder="Tiêu đề" class="form-control input-md" required1="">
+                                <small>Mật khẩu mặc định là admin@123</small>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="Place">Đăng lên</label>
+                            <div class="col-12">
+                                @foreach ($departments as $key => $department)
+                                <div class="checkbox">
+                                    <label for="Place-{{$department->DepartmentID}}">
+                                        <input type="radio" name="DepartmentID" id="Place-{{$department->DepartmentID}}" value="{{$department->DepartmentID}}"> {{$department->Name}}
+                                    </label>
+                                </div>
+
+                                @endforeach
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -138,6 +162,7 @@
         var b = document.getElementById('confirm');
         b.setAttribute("onclick", "window.location.href='" + link + "'");
     })
+
 </script>
 @endsection
 @section('custom_css')
