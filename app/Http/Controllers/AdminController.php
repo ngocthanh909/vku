@@ -23,7 +23,7 @@ class AdminController extends Controller
             return 'storage/'.$destination.'/'.$fileName;
         }
     }
-    function dashboard(){
+    function adminDashboard(){
         return view('admin.dashboard.index');
     }
     function cmsIndex(){
@@ -47,8 +47,8 @@ class AdminController extends Controller
                 "Title_vi" => $request->Title_vi,
                 "SimpleContent_vi" => $request->SimpleContent_vi,
                 "SimpleContent_en" => $request->SimpleContent_en,
-                "Content_vi" => $request->Content_vi,
-                "Content_en" => $request->Content_en,
+                "Content_vi" => htmlspecialchars($request->Content_vi),
+                "Content_en" => htmlspecialchars($request->Content_en),
                 "MetaTitle" => $request->MetaTitle,
                 "MetaKeyword" => $request->MetaKeyword,
                 "MetaDescription" => $request->MetaDescription,
@@ -65,7 +65,6 @@ class AdminController extends Controller
     }
     function cmsEdit(Request $request, $id){
         $cms = $this->cmsGetSingle($id);
-        // dd($cms->Place);
         return view("admin.Cms.update")->with('cms', $cms);
     }
     function cmsUpdate(Request $request, $id){
@@ -75,8 +74,8 @@ class AdminController extends Controller
                 "Title_vi" => $request->Title_vi,
                 "SimpleContent_vi" => $request->SimpleContent_vi,
                 "SimpleContent_en" => $request->SimpleContent_en,
-                "Content_vi" => $request->Content_vi,
-                "Content_en" => $request->Content_en,
+                "Content_vi" => htmlspecialchars($request->Content_vi),
+                "Content_en" => htmlspecialchars($request->Content_en),
                 "MetaTitle" => $request->MetaTitle,
                 "MetaKeyword" => $request->MetaKeyword,
                 "MetaDescription" => $request->MetaDescription,
@@ -158,5 +157,31 @@ class AdminController extends Controller
             }
         }
         return $results;
+    }
+    function cmsCategoryStore(Request $request){
+        $values = [
+            'Name_vi' => $request->Name_vi,
+            'Name_en' => $request->Name_en,
+            'Slug_vi' => $request->Slug_vi,
+            'Slug_en' => $request->Slug_en,
+            'ParentID' => $request->CategoryID,
+        ];
+        $response = DB::table('cms_categories')->insert($values);
+    }
+    function cmsCategoryDelete(Request $request, $id){
+        $response = DB::table('cms_categories')->where('CategoryID', $id)->delete();
+    }
+    function cmsCategoryEdit(Request $request, $id){
+        $category = DB::table('cms_categories')->where('CategoryID', $id)->first();
+        return view('admin.CmsCategory.update')->with('singleCategory', $category);
+    }
+    function cmsCategoryUpdate(Request $request, $id){
+        $values = [
+            'Name_vi' => $request->Name_vi,
+            'Name_en' => $request->Name_en,
+            'Slug_vi' => $request->Slug_vi,
+            'Slug_en' => $request->Slug_en,
+            'ParentID' => $request->CategoryID,
+        ];
     }
 }

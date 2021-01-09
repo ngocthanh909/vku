@@ -50,11 +50,14 @@ class UserController extends Controller
     }
 
     function crawler(){
-        $listQuereFile = DB::table('cms')->where('Avatar','!=', '' )->get('Avatar');
+        $listQuereFile = DB::table('cms')->where('Avatar','!=', '' )->get();
+        // dd($listQuereFile);
         foreach($listQuereFile as $quereFile){
-            // $file = file_get_contents("http://vku.udn.vn/uploads/" . $quereFile->Avatar);
-            $file = file_get_contents("http://vku.udn.vn/uploads/2020/07/16/109656929_175310907362215_892481267078694723_o%20(1).jpg");
+            $quereFile->Avatar = ("http://vku.udn.vn/uploads/" . $quereFile->Avatar);
         };
-        dd($listQuereFile);
+        foreach($listQuereFile as $quereFile){
+            $result = DB::table('cms')->where('CmsID', $quereFile->CmsID)->update(['Avatar' => $quereFile->Avatar]);
+            echo "<br>" . $result;
+        }
     }
 }

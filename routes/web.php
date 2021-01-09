@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController as ADC;
 use App\Http\Controllers\UserController as User;
+use App\Http\Controllers\CKEditorController as CKEditor;
 use Illuminate\Support\Facades\DB;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +20,15 @@ use Illuminate\Support\Facades\DB;
 
 
 Route::prefix('/admin')->group(function () {
+    Route::get('/', [ADC::class, 'adminDashboard'])->name('admin.dashboard');
     Route::prefix('cmscategory')->group(function () {
         Route::get('/', [ADC::class, 'cmsCategoryIndex'])->name('admin.cmscategory.index');
         Route::get('/create', [ADC::class, 'cmsCategoryCreate'])->name('admin.cmscategory.create');
+        Route::get('/edit/{id}', [ADC::class, 'cmsCategoryEdit'])->name('admin.cmscategory.edit');
+        // Resource
+        Route::post('/store', [ADC::class, 'cmsCategoryStore'])->name('admin.cmscategory.store');
+        Route::post('/update/{id}', [ADC::class, 'cmsCategoryUpdate'])->name('admin.cmscategory.update');
+        Route::post('/create/{id}', [ADC::class, 'cmsCategoryDelete'])->name('admin.cmscategory.delete');
         
     });
     Route::prefix('cms')->group(function () {
@@ -42,8 +50,8 @@ Route::prefix('/admin')->group(function () {
 
 Route::domain('vkudemo.test')->group(function () {
     Route::get('/', [User::class, 'index']);
-    Route::get('/browse', [User::class, 'postBrowse']);
-    Route::get('/post/{slug}', [User::class, 'postView']);
+    Route::get('/danhmuc', [User::class, 'postBrowse']);
+    Route::get('/baiviet/{slug}', [User::class, 'postView']);
 
 });
 
@@ -52,3 +60,5 @@ Route::domain('{sub}.vkudemo.test')->group(function ($sub) {
     Route::get('/browse', [User::class, 'postBrowse']);
 });
 Route::get('/crawler', [User::class, 'crawler']);
+
+Route::post('ckeditor/image_upload', [CKEditor::class,'upload'])->name('upload');

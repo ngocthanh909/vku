@@ -23,11 +23,11 @@
                                 <div id="dataTable_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable"></label></div>
                             </div>
                             <div class="col-sm-12 col-md-4">
-                                <a href="#" class="btn btn-success btn-icon-split float-right">
+                                <a href="{{route('admin.cmscategory.create')}}" class="btn btn-success btn-icon-split float-right">
                                     <span class="icon text-white-50">
                                         <i class="fas fa-plus"></i>
                                     </span>
-                                    <span class="text">Tạo mới bài viết</span>
+                                    <span class="text">Tạo danh mục</span>
                                 </a>
                             </div>
                         </div>
@@ -58,7 +58,7 @@
                                             <td>---</td>
                                             <td>{{$category->Slug_vi}}</td>
                                             <td>
-                                                <a href="#" class="btn btn-primary btn-circle btn-sm">
+                                                <a href="{{route('admin.cmscategory.edit', ['id' => $category->CategoryID])}}" class="btn btn-primary btn-circle btn-sm">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                                 <a href="#" class="btn btn-danger btn-circle btn-sm">
