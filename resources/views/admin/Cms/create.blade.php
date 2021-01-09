@@ -59,7 +59,8 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="Content_vi">Nội dung</label>
                         <div class="col">
-                            <textarea class="form-control" id="Content_vi" name="Content_vi">Nội dung</textarea>
+                            <textarea class="form-control" id="Content_vi" name="Content_vi" id="summary-ckeditor">Nội dung</textarea>
+                   
                         </div>
                     </div>
                     <!-- Textarea -->

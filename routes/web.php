@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController as ADC;
 use App\Http\Controllers\UserController as User;
+use App\Http\Controllers\CKEditorController as CKEditor;
 use Illuminate\Support\Facades\DB;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -316,3 +318,5 @@ Route::domain('{sub}.vkudemo.test')->group(function ($sub) {
     Route::get('/', [User::class, 'index']);
     Route::get('/browse', [User::class, 'postBrowse']);
 });
+
+Route::post('ckeditor/image_upload', [CKEditor::class,'upload'])->name('upload');

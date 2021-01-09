@@ -36,6 +36,13 @@
                             <label class="col-md-4 control-label" for="SimpleContent_vi">Mô tả ngắn</label>
                             <div class="col">
                                 <input id="SimpleContent_vi" name="SimpleContent_vi" type="text" placeholder="Mô tả" class="form-control input-md" required1="" value="{{$cms->SimpleContent_vi}}">
+                                <script>
+                                     CKEDITOR.replace( 'SimpleContent_vi', {
+                                        filebrowserUploadUrl: "{{route('upload', ['_token' => csrf_token() ])}}",
+                                        filebrowserUploadMethod: 'form'
+                                    })
+                                </script>
+                               
                             </div>
                         </div>
                         <!-- Text input-->
