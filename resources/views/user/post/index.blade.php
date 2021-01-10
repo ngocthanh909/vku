@@ -9,7 +9,7 @@
         <div class="default-block">
             <ul class="map">
                 <li class="map-item icon"><i class="fas fa-home"></i>Trang chủ</li>
-                <li class="map-item">Trang chủ</li>
+                <li class="map-item">{{$post->Name_vi}}</li>
             </ul>
         </div>
     </div>
@@ -21,7 +21,10 @@
                 {{$post->Title_vi}}
             </div>
             <div class="post-time">
-                <i class="fas fa-calendar-week"></i> Ngày đăng: {{date('M-d-Y',strtotime($post->PostTime))}}
+                <i class="fas fa-calendar-week"></i> Ngày đăng: {{date('M-d-Y',strtotime($post->PostTime))}} <i class="fas fa-compass ml-3"></i> Danh mục: {{$post->Name_vi}}
+            </div>
+            <div class="post-time">
+                
             </div>
             <div class="content">
                 @php

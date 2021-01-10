@@ -38,7 +38,7 @@ class UserController extends Controller
     // Show post
     function postView(Request $request, $slug){
         $query="%$this->department%";
-        $post = DB::table('cms')->where('Slug_vi', $slug)->first();
+        $post = DB::table('cms')->join('cms_categories', 'cms.CategoryID', '=', 'cms_categories.CategoryID')->where('cms.Slug_vi', '=', $slug)->first();
         $post->Content_vi = html_entity_decode($post->Content_vi);
         $headnews = DB::table('cms')->where('Pin', 1)->where('Place', 'LIKE', $query)->paginate(20);
         return view('user.post.index')->with('post', $post)->with('headnews', $headnews);
@@ -48,7 +48,8 @@ class UserController extends Controller
         $query="%$this->department%";
         $allNews = $this->browse($request, $slug, 0, 30);
         $headnews = $this->browse($request, $slug, 1, 30);
-        return view('user.browse.index')->with('allNews', $allNews)->with('headnews', $headnews);
+        $breadcrumb = DB::table('cms_categories')->where('Slug_vi', $slug)->first();
+        return view('user.browse.index')->with('allNews', $allNews)->with('headnews', $headnews)->with('breadcrumb', $breadcrumb);
     }
 
     function crawler(){

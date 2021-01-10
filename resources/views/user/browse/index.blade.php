@@ -6,7 +6,7 @@
         <div class="default-block">
             <ul class="map">
                 <li class="map-item icon"><i class="fas fa-home"></i>Trang chủ</li>
-                <li class="map-item">Trang chủ</li>
+                <li class="map-item">{{$breadcrumb->Name_vi}}</li>
             </ul>
         </div>
     </div>
