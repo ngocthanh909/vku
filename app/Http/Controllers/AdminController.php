@@ -190,4 +190,34 @@ class AdminController extends Controller
         $users = DB::table('admin')->join('departments', 'admin.DepartmentID', '=',  'departments.DepartmentID')->paginate(20);
         return view('admin.account.index')->with('users', $users);
     }
+    function userStore(Request $request){
+        $values = [
+            'Username' => $request->Username,
+            'Password' => md5('admin@123'),
+            'DepartmentID' => $request->DepartmentID,
+            'RegisterTime' => date('Y-m-d H:i:s'),
+        ];
+        $response = DB::table('admin')->insert($values);
+    }
+    function userEdit(Request $request, $id){;
+        $user = DB::table('admin')->where('UserID', $id)->first();
+        return view('admin.account.edit')->with('user', $user);
+    }
+    function userUpdate(Request $request, $id){
+        $values = [
+            'DepartmentID' => $request->DepartmentID,
+        ];
+        $response = DB::table('admin')->where('UserID', $id)->update($values);
+    }
+    function userReset(Request $request, $id){
+        $values = [
+            'Password' => md5('admin@123'),
+        ];
+        $response = DB::table('admin')->where('UserID', $id)->update($values);
+        var_dump($response);
+    }
+    function userDelete(Request $request, $id){
+        $response = DB::table('admin')->where('UserID', $id)->delete();
+        var_dump($response);
+    }
 }

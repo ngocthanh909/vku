@@ -48,7 +48,7 @@
                     <div class="otherev-img">
                         <img src="{{$headnew->Avatar}}" />
                     </div>
-                    <div class="otherev-link"><a href="#">{{$headnew->Title_vi}}</a></div>
+                    <div class="otherev-link"><a href="{{route('postView', ['slug' => $headnew->Slug_vi])}}">{{$headnew->Title_vi}}</a></div>
                 </li>
                 @endforeach
             </ul>

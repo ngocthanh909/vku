@@ -60,16 +60,16 @@
                                             <td>{{$user->Name}}</td>
                                             <td>
                                                 <a href="{{route('admin.user.edit', ['id' => $user->UserID])}}" class="btn btn-primary btn-circle btn-sm">
-                                                <i class="fas fa-edit"></i>
+                                                    <i class="fas fa-edit"></i>
                                                 </a>
-                                                <a href="#confirmReset" class="btn btn-danger btn-circle btn-sm" data-toggle="modal" data-reset="{{route('admin.cmscategory.delete', ['id' => $category->CategoryID])}}">
-                                                    <i class="fas fa-redo-alt"></i></i>
+                                                <a href="#confirmReset" class="btn btn-warning btn-circle btn-sm" data-toggle="modal" data-reset="{{route('admin.user.reset', ['id' => $user->UserID])}}">
+                                                <i class="fas fa-redo-alt"></i></i>
                                                 </a>
-                                                <a href="#confirmDelete" class="btn btn-danger btn-circle btn-sm" data-toggle="modal" data-delete="{{route('admin.cmscategory.delete', ['id' => $category->CategoryID])}}">
+                                                <a href="#confirmDelete" class="btn btn-danger btn-circle btn-sm" data-toggle="modal" data-delete="{{route('admin.user.delete', ['id' => $user->UserID])}}">
                                                     <i class="fas fa-trash"></i>
                                                 </a>
-                                                
-                                                
+
+
                                             </td>
                                         </tr>
                                         @endforeach
@@ -97,22 +97,23 @@
         <div class="card shadow mb-4">
             <!-- Card Header - Accordion -->
             <a href="#cmsCategory" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-                <h6 class="m-0 font-weight-bold text-primary">Danh mục</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Tạo mới tài khoản</h6>
             </a>
             <!-- Card Content - Collapse -->
             <div class="collapse show" id="cmsCategory">
                 <div class="card-body">
                     <form action="{{route('admin.user.store')}}" method="post">
+                    @csrf
                         <!-- Text input-->
                         <div class="form-group">
-                            <label class="col-md-4 control-label" for="Title_en">Tiêu đề</label>
+                            <label class="col-md-4 control-label" for="Title_en">Tên đăng nhập</label>
                             <div class="col">
-                                <input id="Title_vi" name="Title_vi" type="text" placeholder="Tiêu đề" class="form-control input-md" required1="">
+                                <input id="Username" name="Username" type="text" placeholder="Tên nhập người dùng" class="form-control input-md" required1="">
                                 <small>Mật khẩu mặc định là admin@123</small>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-4 control-label" for="Place">Đăng lên</label>
+                            <label class="col-md-4 control-label" for="Place">Đơn vị</label>
                             <div class="col-12">
                                 @foreach ($departments as $key => $department)
                                 <div class="checkbox">
@@ -122,6 +123,12 @@
                                 </div>
 
                                 @endforeach
+                            </div>
+                        </div>
+                        <!-- Button -->
+                        <div class="form-group">
+                            <div class="col-12">
+                                <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-primary">Tạo tài khoản mới</button>
                             </div>
                         </div>
                     </form>
@@ -158,7 +165,8 @@
 <script type="text/javascript">
     $('#confirmDelete').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
-        var link = button.data('delete') // Extract info from data-* attributes
+        var link = button.data('delete')
+         // Extract info from data-* attributes
         var b = document.getElementById('confirm');
         b.setAttribute("onclick", "window.location.href='" + link + "'");
     })

@@ -27,7 +27,7 @@
                         </div>
                     </div>
                     <div class="newevent-article" style="width: 100%;">
-                        <div class="title-wrapper"><a class="title" href="#">{{$allNew->Title_vi}}</a></div>
+                        <div class="title-wrapper"><a class="title" href="{{route('postView', ['slug' => $allNew->Slug_vi])}}">{{$allNew->Title_vi}}</a></div>
                         <div class="description short-description">{{$allNew->SimpleContent_vi}}</div>
                     </div>
                 </li>
@@ -46,7 +46,7 @@
                     <div class="otherev-img">
                         <img src="{{$headnew->Avatar}}" />
                     </div>
-                    <div class="otherev-link"><a href="#">{{$headnew->Title_vi}}</a></div>
+                    <div class="otherev-link"><a href="{{route('postView', ['slug' => $headnew->Slug_vi])}}">{{$headnew->Title_vi}}</a></div>
                 </li>
                 @endforeach
             </ul>

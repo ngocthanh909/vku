@@ -63,6 +63,12 @@
                    
                         </div>
                     </div>
+                    <script>
+                                     CKEDITOR.replace( 'Content_vi', {
+                                        filebrowserUploadUrl: "{{route('upload', ['_token' => csrf_token() ])}}",
+                                        filebrowserUploadMethod: 'form'
+                                    })
+                                </script>
                     <!-- Textarea -->
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="Content_en">Nội dung (tiếng Anh)</label>
@@ -70,6 +76,12 @@
                             <textarea class="form-control" id="Content_en" name="Content_en">Nội dung</textarea>
                         </div>
                     </div>
+                     <script>
+                                     CKEDITOR.replace( 'Content_en', {
+                                        filebrowserUploadUrl: "{{route('upload', ['_token' => csrf_token() ])}}",
+                                        filebrowserUploadMethod: 'form'
+                                    })
+                                </script>
                 </div>
             </div>
             <div class="card shadow mb-4">

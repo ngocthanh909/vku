@@ -46,12 +46,12 @@ Route::prefix('/admin')->middleware('adminAuth')->group(function () {
     Route::prefix('user')->group(function () {
         Route::get('/', [ADC::class, 'userIndex'])->name('admin.user.index');
         // Route::get('/create', [ADC::class, 'cmsCategoryCreate'])->name('admin.cmscategory.create');
-        // Route::get('/edit/{id}', [ADC::class, 'cmsCategoryEdit'])->name('admin.cmscategory.edit');
+        Route::get('/edit/{id}', [ADC::class, 'userEdit'])->name('admin.user.edit');
         // // Resource
         Route::post('/store', [ADC::class, 'userStore'])->name('admin.user.store');
-        // Route::post('/update/{id}', [ADC::class, 'cmsCategoryUpdate'])->name('admin.cmscategory.update');
-        // Route::get('/delete/{id}', [ADC::class, 'cmsCategoryDelete'])->name('admin.cmscategory.delete');
-        
+        Route::post('/update/{id}', [ADC::class, 'userUpdate'])->name('admin.user.update');
+        Route::get('/reset/{id}', [ADC::class, 'userReset'])->name('admin.user.reset');
+        Route::get('/delete/{id}', [ADC::class, 'userDelete'])->name('admin.user.delete');        
     });
 });
 Route::domain('vkudemo.test')->group(function () {

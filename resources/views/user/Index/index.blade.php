@@ -51,6 +51,9 @@
             <div class="title title-left-yellow  mb-3">
                 thông báo
             </div>
+            @php
+                
+            @endphp
             <ul class="newevent-container">
                 @foreach($annous as $key => $annou)
                     <li class="annou-item">

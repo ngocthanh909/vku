@@ -27,10 +27,10 @@
                                         <div class="col-lg-12 mb-5">
                                             <h6 class="font-weight-bold text-uppercase">Giới thiệu</h6>
                                             <ul class="list-unstyled">
-                                                <li class="nav-item"><a href="" class="nav-link text-small pb-0">Unique Features</a></li>
-                                                <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Image Responsive</a></li>
-                                                <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Auto Carousel</a></li>
-                                                <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Newsletter Form</a></li>
+                                                <li class="nav-item"><a href="{{route('postView', ['slug' => 'tong-quan'])}}" class="nav-link text-small pb-0">Tổng quan</a></li>
+                                                <li class="nav-item"><a href="{{route('postView', ['slug' => 'chuc-nang-nhiem-vu'])}}" class="nav-link text-small pb-0 ">Chức năng nhiệm vụ</a></li>
+                                                <li class="nav-item"><a href="{{route('postView', ['slug' => 'co-cau-to-chuc'])}}" class="nav-link text-small pb-0 ">Cơ cấu tổ chức</a></li>
+                                                <li class="nav-item"><a href="{{route('postView', ['slug' => 'doi-ngu'])}}" class="nav-link text-small pb-0 ">Đội ngũ</a></li>
                                             </ul>
                                         </div>
                                     </div>
