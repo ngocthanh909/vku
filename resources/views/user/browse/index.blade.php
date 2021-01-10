@@ -17,7 +17,7 @@
             <div class="title title-left-red  mb-3">
                 Tin mới
             </div>
-            <ul class="newevent-container row">
+            <ul class="newevent-container row mb-3">
                 @foreach($allNews as $key => $allNew)
                 <li class="newevent-item col-md-4" style="flex-direction: column; min-height: 420px; max-height: 600px">
                     <div class="newevent-picture-wrapper" style="width: 100%">
@@ -33,7 +33,9 @@
                 </li>
                 @endforeach
             </ul>
+            <div class="row"><div class="col-12 mx-auto">{{$allNews->links()}}</div></div>
         </div>
+        
     </div>
     <div class="col-md-3">
         <div class="default-block">
@@ -55,4 +57,9 @@
 </div>
 @endsection
 @section('custom_css')
+<style type="text/css">
+.pagination {
+   justify-content: center;
+}
+</style>
 @endsection

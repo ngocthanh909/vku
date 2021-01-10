@@ -40,11 +40,11 @@
                     </div>
                 </div>
             </li>
-            <li class="nav-item"><a href="{{route('news')}}" class="nav-link font-weight-bold text-uppercase">Tin tức và hoạt động</a></li>
+            <li class="nav-item"><a href="{{route('postBrowse', 'tin-tuc-va-hoat-dong')}}" class="nav-link font-weight-bold text-uppercase">Tin tức và hoạt động</a></li>
             <li class="nav-item"><a href="http://tuyensinh.vku.udn.vn/" class="nav-link font-weight-bold text-uppercase">Tuyển sinh</a></li>
-            <li class="nav-item"><a href="" class="nav-link font-weight-bold text-uppercase">Đào tạo</a></li>
-            <li class="nav-item"><a href="" class="nav-link font-weight-bold text-uppercase">Nghiên cứu khoa học</a></li>
-            <li class="nav-item"><a href="" class="nav-link font-weight-bold text-uppercase">Hợp tác quốc tế</a></li>
+            <li class="nav-item"><a href="{{route('postBrowse', 'dao-tao')}}" class="nav-link font-weight-bold text-uppercase">Đào tạo</a></li>
+            <li class="nav-item"><a href="{{route('postBrowse', 'nghien-cuu-khoa-hoc')}}" class="nav-link font-weight-bold text-uppercase">Nghiên cứu khoa học</a></li>
+            <li class="nav-item"><a href="{{route('postBrowse', 'hop-tac-quoc-te')}}" class="nav-link font-weight-bold text-uppercase">Hợp tác quốc tế</a></li>
             <!-- Megamenu-->
             <li class="nav-item dropdown megamenu"><a id="megamneu" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle font-weight-bold text-uppercase">Các đơn vị</a>
                 <div aria-labelledby="megamneu" class="dropdown-menu border-0 p-0 m-0">

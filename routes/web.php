@@ -56,7 +56,7 @@ Route::prefix('/admin')->middleware('adminAuth')->group(function () {
 });
 Route::domain('vkudemo.test')->group(function () {
     Route::get('/', [User::class, 'index']);
-    Route::get('/tintuc', [User::class, 'postBrowse'])->name('news');
+    Route::get('/{slug}', [User::class, 'postBrowse'])->name('postBrowse');
     Route::get('/baiviet/{slug}', [User::class, 'postView'])->name('postView');
 });
 
@@ -74,3 +74,5 @@ Route::get('/admin/login', function(){
 });
 Route::post('/admin/login', [Auth::class,'login'])->name('admin.login');
 Route::get('/admin/logout', [Auth::class,'logout'])->name('admin.logout');
+
+// Route::get('/demo/{slug}', [User::class, 'newsAndEvent']);

@@ -27,7 +27,7 @@ class AdminController extends Controller
         return view('admin.dashboard.index');
     }
     function cmsIndex(){
-        $qr = DB::table('cms')->paginate(20);
+        $qr = DB::table('cms')->orderBy('PostTime', 'DESC')->paginate(20);
         $qr->Place = $this->decodePlaceQuery($qr);
         return view('admin.Cms.index')->with('cmss', $qr);
     }

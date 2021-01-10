@@ -8,6 +8,7 @@ use DB;
 class UserController extends Controller
 {   
     public $department = 0;
+    public $categories = 0;
     function __construct(Request $request){
         $departments = $this->getDepartments();
         foreach($departments as $department){
@@ -18,6 +19,7 @@ class UserController extends Controller
                 $this->department = 1;
             }
         }
+        $this->categories = DB::table('cms_categories')->get();
     }
     function getDepartments(){
         return DB::table('departments')->get();
@@ -41,17 +43,16 @@ class UserController extends Controller
         $headnews = DB::table('cms')->where('Pin', 1)->where('Place', 'LIKE', $query)->paginate(20);
         return view('user.post.index')->with('post', $post)->with('headnews', $headnews);
     }
-    // Browse
-    function postBrowse(Request $request){
+    // Tin tức hoạt động
+    function postBrowse(Request $request, $slug){
         $query="%$this->department%";
-        $allNews = DB::table('cms')->where('Place', 'LIKE', $query)->orderBy('PostTime', 'desc')->paginate(20);
-        $headnews = DB::table('cms')->where('Pin', 1)->where('Place', 'LIKE', $query)->paginate(20);
+        $allNews = $this->browse($request, $slug, 0, 30);
+        $headnews = $this->browse($request, $slug, 1, 30);
         return view('user.browse.index')->with('allNews', $allNews)->with('headnews', $headnews);
     }
 
     function crawler(){
         $listQuereFile = DB::table('cms')->where('Avatar','!=', '' )->get();
-        // dd($listQuereFile);
         foreach($listQuereFile as $quereFile){
             $quereFile->Avatar = ("http://vku.udn.vn/uploads/" . $quereFile->Avatar);
         };
@@ -59,5 +60,66 @@ class UserController extends Controller
             $result = DB::table('cms')->where('CmsID', $quereFile->CmsID)->update(['Avatar' => $quereFile->Avatar]);
             echo "<br>" . $result;
         }
+    }
+    
+    // Nested CMS
+    function createNested($categories, $ParentID = 0)
+    {
+        $results = [];
+        foreach ($categories as $category) {
+            if ($ParentID == $category->ParentID) {
+                $nextParentID = $category->CategoryID;
+                $category->child = $this->createNested($categories, $nextParentID);
+                $results[] = $category;
+            }
+        }
+        return $results;
+    }
+    // Rescusive CMS
+    // function rescusiveCms($structred_categories){
+    //     foreach($structred_categories as $structred_category){
+    //         array_push($this->result, $structred_category->CategoryID);
+    //         var_dump($this->result);
+    //         if(!empty($structred_category->child)){
+    //             $this->rescusiveCms($structred_category->child);
+    //         }
+    //     }
+    // }
+    public $fullList = array();
+    function rescusiveCms($structred_categories, $result){
+        // dd($structred_categories);
+        foreach($structred_categories as $structred_category){
+            array_push($result, $structred_category->CategoryID);
+            array_push($this->fullList, $structred_category->CategoryID);
+            if(!empty($structred_category->child)){
+                $this->rescusiveCms($structred_category->child, $result);
+            }
+        } 
+        return $result;
+    }
+    // New CMS System
+    function browse($request, $slug, $pin, $item){
+        $query="%$this->department%";
+        $category = DB::table('cms_categories')->where('Slug_vi', $slug)->first();
+        $structred_categories = $this->createNested($this->categories, $category->CategoryID);
+        $result = [];
+        $this->rescusiveCms($structred_categories, $result);
+        $conditions = null;
+        if(empty($structred_categories)) {
+            $temp = "'".$category->CategoryID."',";
+            $conditions = $conditions.$temp;
+        } else {
+            foreach($this->fullList as $listItem) {
+                $temp = "'".$listItem."',";
+                $conditions =  $conditions.$temp;
+            }
+        }
+
+        $result = DB::table('cms')->whereRaw('CategoryID IN ('.$conditions.' 0)')->where('Place', 'LIKE', $query)->where('Pin', $pin)->orderBy('PostTime', 'DESC')->paginate($item);
+        return $result;
+    }
+
+    function newsAndEventPosts() {
+        
     }
 }
