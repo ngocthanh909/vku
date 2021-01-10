@@ -34,9 +34,9 @@
             </div>
             <div class="hashtag-wrapper">
                 <ul class="hashtag-list">
-                    <li class="hashtag-item"><a href="#">thanh</a></li>
-                    <li class="hashtag-item"><a href="#">thanh</a></li>
-                    <li class="hashtag-item"><a href="#">thanh</a></li>
+                    @foreach($tags as $key => $tag)
+                        <li class="hashtag-item"><a href="{{route('tagsView', ['tag' => $tag->Name])}}">{{$tag->Name}}</a></li>
+                    @endforeach
                 </ul>
             </div>
         </div>

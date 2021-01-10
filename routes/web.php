@@ -55,9 +55,10 @@ Route::prefix('/admin')->middleware('adminAuth')->group(function () {
     });
 });
 Route::domain('vkudemo.test')->group(function () {
-    Route::get('/', [User::class, 'index']);
+    Route::get('/', [User::class, 'index'])->name('index');
     Route::get('/{slug}', [User::class, 'postBrowse'])->name('postBrowse');
     Route::get('/baiviet/{slug}', [User::class, 'postView'])->name('postView');
+    Route::get('/tags/{tag}', [User::class, 'tagsBrowse'])->name('tagsView');
 });
 
 Route::domain('{sub}.vkudemo.test')->group(function ($sub) {

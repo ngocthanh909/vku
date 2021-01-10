@@ -41,7 +41,8 @@ class UserController extends Controller
         $post = DB::table('cms')->join('cms_categories', 'cms.CategoryID', '=', 'cms_categories.CategoryID')->where('cms.Slug_vi', '=', $slug)->first();
         $post->Content_vi = html_entity_decode($post->Content_vi);
         $headnews = DB::table('cms')->where('Pin', 1)->where('Place', 'LIKE', $query)->paginate(20);
-        return view('user.post.index')->with('post', $post)->with('headnews', $headnews);
+        $tags = DB::table('cms_tags')->join('tags', 'tags.TagID', '=', 'cms_tags.TagID')->where('CmsID', $post->CmsID)->get();        
+        return view('user.post.index')->with('post', $post)->with('headnews', $headnews)->with('tags', $tags);
     }
     // Tin tức hoạt động
     function postBrowse(Request $request, $slug){
@@ -120,7 +121,9 @@ class UserController extends Controller
         return $result;
     }
 
-    function newsAndEventPosts() {
-        
+    function tagsBrowse(Request $request, $tag){
+        $posts = DB::table('tags')->join('cms_tags', 'tags.TagID', '=', 'cms_tags.TagID')->join('cms', 'cms_tags.CmsID', '=', 'cms.CmsID')->where('tags.Name', $tag)->get();
+        // dd($posts);
+        return view('user.browse.tags')->with('posts', $posts);
     }
 }

@@ -1,8 +1,8 @@
-<header class="header-wrapper">
+<header class="header-wrapper  d-none d-sm-block">
     <div class="container">
         <div class="row">
             <div class="col-md-8">
-                <img class="header-logo" src="{{asset('assets/vku/img/header_logo.png')}}">
+                <a class="" href="{{route('index')}}"><img class="header-logo" src="{{asset('assets/vku/img/header_logo.png')}}"></a>
             </div>
             <div class="col-4">
 

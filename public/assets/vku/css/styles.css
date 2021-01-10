@@ -404,3 +404,26 @@ a:hover {
 .hashtag-item a {
     color: white;
 }
+/* Hashtags page */
+.post_list{
+    list-style: none;
+}
+.post_list_item{
+    list-style: none;
+    border-bottom: 1px solid #cdcdcd;
+    padding: 2rem;
+}
+.post_list_item:last-child {
+    border-bottom: none;
+}
+.post_list__time{
+    
+}
+.post_list__title{
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+.post_list__description{
+    text-align: justify;
+    text-indent: 10px;
+}
