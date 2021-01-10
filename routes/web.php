@@ -56,7 +56,7 @@ Route::prefix('/admin')->middleware('adminAuth')->group(function () {
 });
 Route::domain('vkudemo.test')->group(function () {
     Route::get('/', [User::class, 'index']);
-    Route::get('/danhmuc', [User::class, 'postBrowse']);
+    Route::get('/tintuc', [User::class, 'postBrowse'])->name('news');
     Route::get('/baiviet/{slug}', [User::class, 'postView'])->name('postView');
 });
 

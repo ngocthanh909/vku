@@ -2,6 +2,7 @@
 @section('title', $post->Title_vi)
 @section('description', $post->MetaDescription)
 @section('keywords', $post->MetaKeyword)
+@section('previewImage', $post->Avatar)
 @section('body')
 <div class="row mb-3">
     <div class="col-12">

@@ -40,7 +40,7 @@
                     </div>
                 </div>
             </li>
-            <li class="nav-item"><a href="" class="nav-link font-weight-bold text-uppercase">Tin tức và hoạt động</a></li>
+            <li class="nav-item"><a href="{{route('news')}}" class="nav-link font-weight-bold text-uppercase">Tin tức và hoạt động</a></li>
             <li class="nav-item"><a href="http://tuyensinh.vku.udn.vn/" class="nav-link font-weight-bold text-uppercase">Tuyển sinh</a></li>
             <li class="nav-item"><a href="" class="nav-link font-weight-bold text-uppercase">Đào tạo</a></li>
             <li class="nav-item"><a href="" class="nav-link font-weight-bold text-uppercase">Nghiên cứu khoa học</a></li>

@@ -5,6 +5,11 @@
     <!-- Required meta tags -->
     <meta name="description" content="@yield('description')">
     <meta name="keywords" content="@yield('keywords')">
+    <meta property="og:image" content="@yield('previewImage')">
+    <meta property="og:url" content="{{url()->full()}}">
+    <meta property="og:type" content="blog"/>
+    <meta property="og:description" content="@yield('description')"/>
+    <meta property="og:title" content="@yield('title')"/>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
