@@ -417,7 +417,7 @@ a:hover {
     border-bottom: none;
 }
 .post_list__time{
-    
+    display: block;
 }
 .post_list__title{
     font-size: 1.8rem;

@@ -117,7 +117,11 @@ class UserController extends Controller
             }
         }
 
-        $result = DB::table('cms')->whereRaw('CategoryID IN ('.$conditions.' 0)')->where('Place', 'LIKE', $query)->where('Pin', $pin)->orderBy('PostTime', 'DESC')->paginate($item);
+        $query = DB::table('cms')->join('cms_categories', 'cms.CategoryID', '=', 'cms_categories.CategoryID')->whereRaw('cms.CategoryID IN ('.$conditions.' 0)')->where('Place', 'LIKE', $query)->orderBy('PostTime', 'DESC');
+        if($pin != 0){
+            $query->where('Pin', $pin);
+        }
+        $result = $query->select('cms.Avatar', 'cms_categories.Name_vi', 'cms_categories.Slug_vi as SlugCat_vi', 'cms.Slug_vi', 'cms.Title_vi', 'cms.SimpleContent_vi', 'cms.PostTime', 'cms.CmsID')->paginate($item);
         return $result;
     }
 
@@ -125,5 +129,36 @@ class UserController extends Controller
         $posts = DB::table('tags')->join('cms_tags', 'tags.TagID', '=', 'cms_tags.TagID')->join('cms', 'cms_tags.CmsID', '=', 'cms.CmsID')->where('tags.Name', $tag)->get();
         // dd($posts);
         return view('user.browse.tags')->with('posts', $posts);
+    }
+
+    // CSE
+    function indexCse(Request $request){
+        $this->department = 2;
+        $eduNews = $this->browse($request, 'tin-hoc-vu', 1, 10);
+        $stdActivities = $this->browse($request, 'hoat-dong-sinh-vien', 1, 10);
+        return view('cse.index.index')->with('eduNews', $eduNews)->with('stdActivities', $stdActivities);
+    }
+    function csePostBrowse(Request $request, $slug){
+        $this->department = 2;
+        $index = DB::table('cms_categories')->where('Slug_vi', $slug)->first();
+        $headnews = $this->browse($request, $slug, 1, 10);
+        $othernews = $this->browse($request, $slug, 0, 20);
+        return view('cse.browse.browse')->with('headnews', $headnews)->with('othernews', $othernews)->with('index', $index);
+    }
+    function csePostView(Request $request, $slug){
+        $this->department = 2;
+        $post = DB::table('cms')->join('cms_categories', 'cms.CategoryID', '=', 'cms_categories.CategoryID')->where('cms.Slug_vi', '=', $slug)->first();
+        $post->Content_vi = html_entity_decode($post->Content_vi);
+        $category = DB::table('cms_categories')->where('CategoryID', '=', $post->CategoryID)->first();
+        // dd($category->Slug_vi);
+        $relatives = $this->browse($request, $category->Slug_vi, 0, 10);
+        // dd($relatives);
+        $tags = DB::table('cms_tags')->join('tags', 'tags.TagID', '=', 'cms_tags.TagID')->where('cms_tags.CmsID', $post->CmsID)->get();        
+        return view('cse.post.index')->with('post', $post)->with('tags', $tags)->with('relatives', $relatives);
+    }
+    function cseTagsBrowse(Request $request, $tag) {
+        $this->department = 2;
+        $posts = DB::table('tags')->join('cms_tags', 'tags.TagID', '=', 'cms_tags.TagID')->join('cms', 'cms_tags.CmsID', '=', 'cms.CmsID')->where('Place', 'LIKE', '%2%')->where('tags.Name', $tag)->get();
+        return view('cse.browse.tags')->with('posts', $posts);
     }
 }

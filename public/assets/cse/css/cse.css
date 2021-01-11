@@ -1,7 +1,16 @@
 body {
     font-family: 'Open Sans', sans-serif;
 }
-
+a {
+    color: #606f7b;
+    cursor: pointer;
+    text-decoration: none;
+    transition: none 86ms ease-out;
+}
+a:hover {
+    text-decoration: none;
+    color: #011b67;
+}
 .navbar {
     background-color: white;
 }
@@ -150,6 +159,7 @@ body {
 .post-title a {
     text-decoration: none;
     font-size: 18px;
+    font-weight: 600;
 }
 
 footer {
@@ -183,6 +193,12 @@ footer {
 
 .post-content .post-description {
     font-size: 14px;
+    text-align: justify;
+    text-indent:  10px;
+}
+.post-content .post-description img {
+    max-width: 100%;
+    padding: 2rem;
 }
 
 .content-section {
@@ -233,8 +249,7 @@ footer {
     text-transform: uppercase;
     font-weight: 700;
     color: white;
-    -webkit-text-stroke-width: 2px;
-    -webkit-text-stroke-color: black;
+    text-shadow: 2px 2px 10px #606f7b;
 }
 
 
@@ -278,4 +293,61 @@ ul.breadcrumb {
 @keyframes scrollanimate {
     from {opacity: 0; padding-top: 200px;}
     to {opacity: 1; padding-top: 0;}
+}
+
+/* Custom */
+.post-description-browse {
+    font-size: 13px;
+    text-align: justify;
+    text-indent: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+.tags-wrapper {
+    list-style-type: none;
+}
+.tags-wrapper::before {
+    content: "Tags:";
+}
+.tags-item {
+    display: inline-block;
+    margin-left: 10px;
+}
+.tags-item a {
+    padding: 5px 10px;
+    background-color: blue;
+    color: white;
+    border-radius: 50px;
+}
+.tags-item a:hover {
+    background-color: rgb(100, 100, 253);
+}
+
+/* Tags page */
+/* Hashtags page */
+.post_list{
+    list-style: none;
+}
+.post_list_item{
+    list-style: none;
+    border-bottom: 1px solid #cdcdcd;
+    padding: 2rem;
+}
+.post_list_item:last-child {
+    border-bottom: none;
+}
+.post_list__time{
+    display: block;
+}
+.post_list__title{
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+.post_list__description{
+    text-align: justify;
+    text-indent: 10px;
 }

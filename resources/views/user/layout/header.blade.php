@@ -54,16 +54,16 @@
                                 <div class="p-4">
                                     <div class="row">
                                         <div class="col-lg-6 mb-4">
-                                            <h6 class="font-weight-bold text-uppercase">Các đơn vị</h6>
+                                            <h6 class="font-weight-bold text-uppercase">Khoa</h6>
                                             <ul class="list-unstyled">
-                                                <li class="nav-item"><a href="" class="nav-link text-small pb-0">Unique Features</a></li>
+                                                <li class="nav-item"><a href="{{route('cseIndex')}}" class="nav-link text-small pb-0">Khoa học máy tính</a></li>
                                                 <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Image Responsive</a></li>
                                                 <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Auto Carousel</a></li>
                                                 <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Newsletter Form</a></li>
                                             </ul>
                                         </div>
                                         <div class="col-lg-6 mb-4">
-                                            <h6 class="font-weight-bold text-uppercase">MegaMenu heading</h6>
+                                            <h6 class="font-weight-bold text-uppercase">Đoàn hội</h6>
                                             <ul class="list-unstyled">
                                                 <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Unique Features</a></li>
                                                 <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Image Responsive</a></li>

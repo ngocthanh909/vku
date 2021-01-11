@@ -57,7 +57,8 @@ class AdminController extends Controller
                 "CategoryID" => $request->CategoryID,
                 "Place" => $this->encodePlace($request->Place),
                 "Tags" => $request->Tags,
-                "PostTime" => date('Y-m-d H:i:s')
+                "PostTime" => date('Y-m-d H:i:s'),
+                "Pin" => $request->Pin,
             ];
         $insertedRow = DB::table('cms')->insertGetId($values);
         if($insertedRow != null && $insertedRow != 0){
@@ -85,7 +86,8 @@ class AdminController extends Controller
                 "CategoryID" => $request->CategoryID,
                 "Place" => $this->encodePlace($request->Place),
                 "Tags" => $request->Tags,
-                "UpdateTime" => date('Y-m-d H:i:s')
+                "UpdateTime" => date('Y-m-d H:i:s'),
+                "Pin" => $request->Pin,
             ];
             if($request->File('Avatar') != null){
                 $values["Avatar"] = $this->fileUpload($request, 'Avatar', 'PostImage', date('m-d-Y_hia'));

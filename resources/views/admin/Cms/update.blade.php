@@ -35,7 +35,7 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="SimpleContent_vi">Mô tả ngắn</label>
                             <div class="col">
-                                <input id="SimpleContent_vi" name="SimpleContent_vi" type="text" placeholder="Mô tả" class="form-control input-md" required1="" value="{{$cms->SimpleContent_vi}}">                               
+                                <input id="SimpleContent_vi" name="SimpleContent_vi" type="text" placeholder="Mô tả" class="form-control input-md" required1="" value="{{$cms->SimpleContent_vi}}">
                             </div>
                         </div>
                         <!-- Text input-->
@@ -61,11 +61,12 @@
                             <textarea class="form-control" id="Content_vi" name="Content_vi">{{htmlspecialchars_decode($cms->Content_vi)}}</textarea>
                         </div>
                         <script>
-                                     CKEDITOR.replace( 'Content_vi', {
-                                        filebrowserUploadUrl: "{{route('upload', ['_token' => csrf_token() ])}}",
-                                        filebrowserUploadMethod: 'form'
-                                    })
-                                </script>
+                            CKEDITOR.replace('Content_vi', {
+                                filebrowserUploadUrl: "{{route('upload', ['_token' => csrf_token() ])}}"
+                                , filebrowserUploadMethod: 'form'
+                            })
+
+                        </script>
                     </div>
                     <!-- Textarea -->
                     <div class="form-group">
@@ -74,11 +75,12 @@
                             <textarea class="form-control" id="Content_en" name="Content_en">{{htmlspecialchars_decode($cms->Content_en)}}</textarea>
                         </div>
                         <script>
-                                     CKEDITOR.replace( 'Content_en', {
-                                        filebrowserUploadUrl: "{{route('upload', ['_token' => csrf_token() ])}}",
-                                        filebrowserUploadMethod: 'form'
-                                    })
-                                </script>
+                            CKEDITOR.replace('Content_en', {
+                                filebrowserUploadUrl: "{{route('upload', ['_token' => csrf_token() ])}}"
+                                , filebrowserUploadMethod: 'form'
+                            })
+
+                        </script>
                     </div>
                 </div>
             </div>
@@ -95,17 +97,31 @@
                             @foreach ($departments as $key => $department)
                             <div class="checkbox">
                                 <label for="Place-{{$department->DepartmentID}}">
-                                    <input type="checkbox" name="Place[]" id="Place-{{$department->DepartmentID}}" value="{{$department->DepartmentID}}" 
-                                        @foreach($cms->Place as $key => $value)
-                                            @if($department->DepartmentID == $value)
-                                                checked
-                                            @endif
-                                        @endforeach
+                                    <input type="checkbox" name="Place[]" id="Place-{{$department->DepartmentID}}" value="{{$department->DepartmentID}}" @foreach($cms->Place as $key => $value)
+                                    @if($department->DepartmentID == $value)
+                                    checked
+                                    @endif
+                                    @endforeach
                                     > {{$department->Name}}
                                 </label>
                             </div>
 
                             @endforeach
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="Place">Ghim bài viết</label>
+                        <div class="col-12">
+                            <div class="checkbox">
+                                @if($cms->Pin)
+                                <input type="radio" name="Pin" id="" value="1" checked="checked"> Pin
+                                <input type="radio" name="Pin" id="" value="0"> Pin
+                                @else
+                                <input type="radio" name="Pin" id="" value="1"> Ghim
+                                <input type="radio" name="Pin" id="" value="0"  checked="checked"> Bỏ ghim
+                                @endif
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -216,22 +232,25 @@
 <script>
     var upload = new FileUploadWithPreview("myUniqueUploadId");
     upload.cachedFileArray;
+
 </script>
 <script src="{{asset('assets/vku/js/slug.js')}}"></script>
 <script>
-    $(document).ready(function(){
-        $('#Title_vi').on('input', function(){
+    $(document).ready(function() {
+        $('#Title_vi').on('input', function() {
             console.log($('#Title_vi').val());
             $('#Slug_vi').val(ChangeToSlug($('#Title_vi').val()));
         });
     });
+
 </script>
 <script>
-    $(document).ready(function(){
-        $('#Title_en').on('input', function(){
+    $(document).ready(function() {
+        $('#Title_en').on('input', function() {
             console.log($('#Title_en').val());
             $('#Slug_en').val(ChangeToSlug($('#Title_en').val()));
         });
     });
+
 </script>
 @endsection

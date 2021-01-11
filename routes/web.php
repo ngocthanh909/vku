@@ -61,10 +61,18 @@ Route::domain('vkudemo.test')->group(function () {
     Route::get('/tags/{tag}', [User::class, 'tagsBrowse'])->name('tagsView');
 });
 
-Route::domain('{sub}.vkudemo.test')->group(function ($sub) {
-    Route::get('/', [User::class, 'index']);
-    Route::get('/browse', [User::class, 'postBrowse']);
+// Route::domain('{sub}.vkudemo.test')->group(function ($sub) {
+//     Route::get('/', [User::class, 'index']);
+//     Route::get('/browse', [User::class, 'postBrowse']);
+// });
+
+Route::domain('cse.vkudemo.test')->group(function ($sub) {
+    Route::get('/', [User::class, 'indexCse'])->name('cseIndex');
+    Route::get('/{slug}', [User::class, 'csePostBrowse'])->name('csePostBrowse');
+    Route::get('/baiviet/{slug}', [User::class, 'csePostView'])->name('csePostView');
+    Route::get('/tags/{tag}', [User::class, 'cseTagsBrowse'])->name('cseTagsView');
 });
+
 Route::get('/crawler', [User::class, 'crawler']);
 
 Route::post('ckeditor/image_upload', [CKEditor::class,'upload'])->name('upload');

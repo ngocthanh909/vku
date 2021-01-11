@@ -60,15 +60,16 @@
                         <label class="col-md-4 control-label" for="Content_vi">Nội dung</label>
                         <div class="col">
                             <textarea class="form-control" id="Content_vi" name="Content_vi" id="summary-ckeditor">Nội dung</textarea>
-                   
+
                         </div>
                     </div>
                     <script>
-                                     CKEDITOR.replace( 'Content_vi', {
-                                        filebrowserUploadUrl: "{{route('upload', ['_token' => csrf_token() ])}}",
-                                        filebrowserUploadMethod: 'form'
-                                    })
-                                </script>
+                        CKEDITOR.replace('Content_vi', {
+                            filebrowserUploadUrl: "{{route('upload', ['_token' => csrf_token() ])}}"
+                            , filebrowserUploadMethod: 'form'
+                        })
+
+                    </script>
                     <!-- Textarea -->
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="Content_en">Nội dung (tiếng Anh)</label>
@@ -76,12 +77,13 @@
                             <textarea class="form-control" id="Content_en" name="Content_en">Nội dung</textarea>
                         </div>
                     </div>
-                     <script>
-                                     CKEDITOR.replace( 'Content_en', {
-                                        filebrowserUploadUrl: "{{route('upload', ['_token' => csrf_token() ])}}",
-                                        filebrowserUploadMethod: 'form'
-                                    })
-                                </script>
+                    <script>
+                        CKEDITOR.replace('Content_en', {
+                            filebrowserUploadUrl: "{{route('upload', ['_token' => csrf_token() ])}}"
+                            , filebrowserUploadMethod: 'form'
+                        })
+
+                    </script>
                 </div>
             </div>
             <div class="card shadow mb-4">
@@ -104,7 +106,18 @@
                             @endforeach
                         </div>
                     </div>
+                    <div class="form-group">
+                    <label class="col-md-4 control-label" for="Place">Ghim bài viết</label>
+                    <div class="col-12">
+                        <div class="checkbox">
+                            <input type="radio" name="Pin" id="" value="1"> Ghim
+                            <input type="radio" name="Pin" id="" value="0" checked> Bỏ ghim
+                            </label>
+                        </div>
+                    </div>
                 </div>
+                </div>
+                
             </div>
         </div>
         <div class="col-lg-4">
@@ -216,19 +229,21 @@
 </script>
 <script src="{{asset('assets/vku/js/slug.js')}}"></script>
 <script>
-    $(document).ready(function(){
-        $('#Title_vi').on('input', function(){
+    $(document).ready(function() {
+        $('#Title_vi').on('input', function() {
             console.log($('#Title_vi').val());
             $('#Slug_vi').val(ChangeToSlug($('#Title_vi').val()));
         });
     });
+
 </script>
 <script>
-    $(document).ready(function(){
-        $('#Title_en').on('input', function(){
+    $(document).ready(function() {
+        $('#Title_en').on('input', function() {
             console.log($('#Title_en').val());
             $('#Slug_en').val(ChangeToSlug($('#Title_en').val()));
         });
     });
+
 </script>
 @endsection
