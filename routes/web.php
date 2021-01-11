@@ -42,6 +42,7 @@ Route::prefix('/admin')->middleware('adminAuth')->group(function () {
         Route::post('/update/{id}', [ADC::class, 'cmsUpdate'])->name('admin.cms.update');
         Route::get('/delete/{id}', [ADC::class, 'cmsDelete'])->name('admin.cms.delete');
         Route::get('/json', [ADC::class, 'cmsJson']);
+       
     });
     Route::prefix('user')->group(function () {
         Route::get('/', [ADC::class, 'userIndex'])->name('admin.user.index');
@@ -77,3 +78,15 @@ Route::post('/admin/login', [Auth::class,'login'])->name('admin.login');
 Route::get('/admin/logout', [Auth::class,'logout'])->name('admin.logout');
 
 // Route::get('/demo/{slug}', [User::class, 'newsAndEvent']);
+
+Route::get('test/mailing', [ADC::class , 'emailPage']);
+Route::post('test/mailing', [ADC::class, 'postEmail'])->name('post_email');
+Route::get('test/maillist', [ADC::class, 'getEmailList'])->name('list_email');
+
+//.env
+// MAIL_DRIVER=smtp
+// MAIL_HOST=smtp.gmail.com
+// MAIL_PORT=587
+// MAIL_USERNAME=
+// MAIL_PASSWORD=
+// MAIL_ENCRYPTION=tls
