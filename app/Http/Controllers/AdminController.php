@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use DB;
+use App\Jobs\SendEmail;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MailNotify;
 
 class AdminController extends Controller
 {   
@@ -222,4 +225,42 @@ class AdminController extends Controller
         $response = DB::table('admin')->where('UserID', $id)->delete();
         var_dump($response);
     }
+
+    function emailPage(){
+        return view('admin.Cms.mailing');
+    }
+
+    function postEmail(Request $res){
+
+        if($res->emailtitle == null || $res->emailcontent == null)
+        {
+
+            return view('admin.Cms.mailing')->with('errorNotify' , "Bạn chưa nhập đủ nội dung!!!");
+           
+        }
+        else {
+ 
+            $mailingList = DB::table('mailinglist')->get();
+            foreach ($mailingList as $item){
+                Mail::send([], [], function($message) use ($item,$res) {
+                    $message->to($item->email);
+                    $message->subject($res->emailtitle);
+                    $message->setBody($res->emailcontent, 'text/html');
+                });
+            }
+
+
+            return view('admin.Cms.mailing')->with('successNotify' , "Đã gửi thành công!!!");
+        }
+
+    }
+
+    function getEmailList(){
+        $mailList = DB::table('mailinglist')->get();
+
+        return view('admin.Cms.mailinglist' , compact('mailList'));
+    }
+
+
+
 }
