@@ -20,13 +20,12 @@
     @yield('custom_css')
 
 </head>
-
 <body id="page-top">
     <!-- Page Wrapper -->
     <div id="wrapper">
 
         <!-- Sidebar -->
-      @include('admin.layout.sidebar')
+        @include('admin.layout.sidebar')
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -89,13 +88,34 @@
 
                 </nav>
                 <!-- End of Topbar -->
-
+                @php
+                if(session('code') != null){
+                $code = session()->pull('code');
+                $msg = session()->pull('msg');
+                }
+                @endphp
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+                    @isset($code)
+                    @if($code == 1)
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Thành công</strong> {{$msg}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    @elseif($code == 0)
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Thất bại!</strong> {{$msg}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    @endif
+                    @endisset
                     @yield('body')
                 </div>
                 <!-- /.container-fluid -->
-
             </div>
             <!-- End of Main Content -->
 
@@ -103,7 +123,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                        <span>Copyright &copy; VKU {{date('Y')}}</span>
                     </div>
                 </div>
             </footer>

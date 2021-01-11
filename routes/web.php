@@ -54,18 +54,21 @@ Route::prefix('/admin')->middleware('adminAuth')->group(function () {
         Route::get('/reset/{id}', [ADC::class, 'userReset'])->name('admin.user.reset');
         Route::get('/delete/{id}', [ADC::class, 'userDelete'])->name('admin.user.delete');        
     });
+    // Mail
+    Route::prefix('mail')->group(function (){
+        Route::get('/', [ADC::class , 'emailPage'])->name('admin.mail.index');
+        Route::post('mailing', [ADC::class, 'postEmail'])->name('post_email');
+        Route::get('maillist', [ADC::class, 'getEmailList'])->name('list_email');
+    });
 });
 Route::domain('vkudemo.test')->group(function () {
     Route::get('/', [User::class, 'index'])->name('index');
     Route::get('/{slug}', [User::class, 'postBrowse'])->name('postBrowse');
     Route::get('/baiviet/{slug}', [User::class, 'postView'])->name('postView');
     Route::get('/tags/{tag}', [User::class, 'tagsBrowse'])->name('tagsView');
+    Route::post('/subscribe', [User::class, 'subscribe'])->name('subscribe');
 });
 
-// Route::domain('{sub}.vkudemo.test')->group(function ($sub) {
-//     Route::get('/', [User::class, 'index']);
-//     Route::get('/browse', [User::class, 'postBrowse']);
-// });
 
 Route::domain('cse.vkudemo.test')->group(function ($sub) {
     Route::get('/', [User::class, 'indexCse'])->name('cseIndex');
@@ -87,9 +90,7 @@ Route::get('/admin/logout', [Auth::class,'logout'])->name('admin.logout');
 
 // Route::get('/demo/{slug}', [User::class, 'newsAndEvent']);
 
-Route::get('test/mailing', [ADC::class , 'emailPage']);
-Route::post('test/mailing', [ADC::class, 'postEmail'])->name('post_email');
-Route::get('test/maillist', [ADC::class, 'getEmailList'])->name('list_email');
+
 
 //.env
 // MAIL_DRIVER=smtp

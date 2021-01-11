@@ -2,116 +2,145 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\View;
 use DB;
-use App\Jobs\SendEmail;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\MailNotify;
+use Illuminate\Support\Facades\View;
 
 class AdminController extends Controller
-{   
+{
     public $category;
-    function __construct(){
+    public function __construct()
+    {
         $this->category = $this->categoryList();
         View::share(['departments' => DB::table('departments')->get(), 'categories' => $this->createNested($this->category)]);
     }
-    public function fileUpload($request, $formvalue, $destination, $fileName){
+    // Message
+    public function returnMessage($code)
+    {
+        if ($code) {
+            session(['code' => 1, 'msg' => 'Thành công!']);
+            return redirect()->back();
+        } else {
+            session(['code' => 0, 'msg' => 'Thao tác thất bại. Vui lòng kiểm tra lại']);
+            return redirect()->back();
+        }
+    }
+    public function fileUpload($request, $formvalue, $destination, $fileName)
+    {
         if ($request->hasFile($formvalue)) {
             $file = $request->file($formvalue);
             $path = $file->path();
             $extension = $file->extension();
             $fileName = $fileName . '.' . $extension;
-            $patch = $file->storeAs('public/'.$destination, $fileName);
-            return 'storage/'.$destination.'/'.$fileName;
+            $patch = $file->storeAs('public/' . $destination, $fileName);
+            return 'storage/' . $destination . '/' . $fileName;
         }
     }
-    function adminDashboard(){
+    public function adminDashboard()
+    {
         return view('admin.dashboard.index');
     }
-    function cmsIndex(){
+    public function cmsIndex()
+    {
         $qr = DB::table('cms')->orderBy('PostTime', 'DESC')->paginate(20);
         $qr->Place = $this->decodePlaceQuery($qr);
         return view('admin.Cms.index')->with('cmss', $qr);
     }
-    function cmsCreate(){
+    public function cmsCreate()
+    {
         return view('admin.Cms.create');
     }
-    function cmsGetSingle($id){
+    public function cmsGetSingle($id)
+    {
         $qr = DB::table('cms')->where('CmsID', $id)->first();
         $qr->Place = json_decode($qr->Place);
         return $qr;
     }
-    function cmsStore(Request $request){
+    public function cmsStore(Request $request)
+    {
         $values =
-            [      
-                "Avatar" => $this->fileUpload($request, 'Avatar', 'PostImage', date('m-d-Y_hia')),
-                "Title_en" => $request->Title_en,
-                "Title_vi" => $request->Title_vi,
-                "SimpleContent_vi" => $request->SimpleContent_vi,
-                "SimpleContent_en" => $request->SimpleContent_en,
-                "Content_vi" => htmlspecialchars($request->Content_vi),
-                "Content_en" => htmlspecialchars($request->Content_en),
-                "MetaTitle" => $request->MetaTitle,
-                "MetaKeyword" => $request->MetaKeyword,
-                "MetaDescription" => $request->MetaDescription,
-                "Slug_vi" => $request->Slug_vi,
-                "Slug_en" => $request->Slug_en,
-                "CategoryID" => $request->CategoryID,
-                "Place" => $this->encodePlace($request->Place),
-                "Tags" => $request->Tags,
-                "PostTime" => date('Y-m-d H:i:s'),
-                "Pin" => $request->Pin,
-            ];
+            [
+            "Avatar" => $this->fileUpload($request, 'Avatar', 'PostImage', date('m-d-Y_hia')),
+            "Title_en" => $request->Title_en,
+            "Title_vi" => $request->Title_vi,
+            "SimpleContent_vi" => $request->SimpleContent_vi,
+            "SimpleContent_en" => $request->SimpleContent_en,
+            "Content_vi" => htmlspecialchars($request->Content_vi),
+            "Content_en" => htmlspecialchars($request->Content_en),
+            "MetaTitle" => $request->MetaTitle,
+            "MetaKeyword" => $request->MetaKeyword,
+            "MetaDescription" => $request->MetaDescription,
+            "Slug_vi" => $request->Slug_vi,
+            "Slug_en" => $request->Slug_en,
+            "CategoryID" => $request->CategoryID,
+            "Place" => $this->encodePlace($request->Place),
+            "Tags" => $request->Tags,
+            "PostTime" => date('Y-m-d H:i:s'),
+            "Pin" => $request->Pin,
+        ];
         $insertedRow = DB::table('cms')->insertGetId($values);
-        if($insertedRow != null && $insertedRow != 0){
+        if ($insertedRow != null && $insertedRow != 0) {
             $this->solveTags($values['Tags'], $insertedRow);
         }
+        $this->returnMessage($insertedRow);
+        return redirect()->back();
     }
-    function cmsEdit(Request $request, $id){
+    public function cmsEdit(Request $request, $id)
+    {
         $cms = $this->cmsGetSingle($id);
         return view("admin.Cms.update")->with('cms', $cms);
     }
-    function cmsUpdate(Request $request, $id){
+    public function cmsUpdate(Request $request, $id)
+    {
         $values =
-            [      
-                "Title_en" => $request->Title_en,
-                "Title_vi" => $request->Title_vi,
-                "SimpleContent_vi" => $request->SimpleContent_vi,
-                "SimpleContent_en" => $request->SimpleContent_en,
-                "Content_vi" => htmlspecialchars($request->Content_vi),
-                "Content_en" => htmlspecialchars($request->Content_en),
-                "MetaTitle" => $request->MetaTitle,
-                "MetaKeyword" => $request->MetaKeyword,
-                "MetaDescription" => $request->MetaDescription,
-                "Slug_vi" => $request->Slug_vi,
-                "Slug_en" => $request->Slug_en,
-                "CategoryID" => $request->CategoryID,
-                "Place" => $this->encodePlace($request->Place),
-                "Tags" => $request->Tags,
-                "UpdateTime" => date('Y-m-d H:i:s'),
-                "Pin" => $request->Pin,
-            ];
-            if($request->File('Avatar') != null){
-                $values["Avatar"] = $this->fileUpload($request, 'Avatar', 'PostImage', date('m-d-Y_hia'));
-            }
-            // dd($values);
-            var_dump(DB::table('cms')->where('CmsID', $id)->update($values));
+            [
+            "Title_en" => $request->Title_en,
+            "Title_vi" => $request->Title_vi,
+            "SimpleContent_vi" => $request->SimpleContent_vi,
+            "SimpleContent_en" => $request->SimpleContent_en,
+            "Content_vi" => htmlspecialchars($request->Content_vi),
+            "Content_en" => htmlspecialchars($request->Content_en),
+            "MetaTitle" => $request->MetaTitle,
+            "MetaKeyword" => $request->MetaKeyword,
+            "MetaDescription" => $request->MetaDescription,
+            "Slug_vi" => $request->Slug_vi,
+            "Slug_en" => $request->Slug_en,
+            "CategoryID" => $request->CategoryID,
+            "Place" => $this->encodePlace($request->Place),
+            "Tags" => $request->Tags,
+            "UpdateTime" => date('Y-m-d H:i:s'),
+            "Pin" => $request->Pin,
+        ];
+        if ($request->File('Avatar') != null) {
+            $values["Avatar"] = $this->fileUpload($request, 'Avatar', 'PostImage', date('m-d-Y_hia'));
+        }
+        $updatedRow = DB::table('cms')->where('CmsID', $id)->update($values);
+
+        if ($updatedRow) {
+
+            $this->solveTags($values['Tags'], $id);
+        }
+        $this->returnMessage($updatedRow);
+        return redirect()->back();
     }
-    function cmsDelete(Request $request, $id){
+    public function cmsDelete(Request $request, $id)
+    {
         $response = DB::table('cms')->where('CmsID', $id)->delete();
-        var_dump($response);
+        $this->returnMessage($response);
+        return redirect()->back();
     }
     /*
-        TAG ZONE
-        https://github.com/PhuongNamCorpsIntern/workspace/issues/15
-    */
-    function solveTags($tags, $CmsID) {
+    TAG ZONE
+    https://github.com/PhuongNamCorpsIntern/workspace/issues/15
+     */
+    public function solveTags($tags, $CmsID)
+    {
         $tagsArray = explode(',', $tags);
         foreach ($tagsArray as $tag) {
             $tags_id = DB::table('tags')->select('TagID')->where('Name', $tag)->first();
-            if($tags_id != null){
-                $qr = DB::table('cms_tags')->insert(['CmsID' => $CmsID, 'TagID' => $tags_id]);
+            if ($tags_id != null) {
+                $qr = DB::table('cms_tags')->insert(['TagID' => $tags_id->TagID, 'CmsID' => $CmsID]);     
             } else {
                 $tags_id = DB::table('tags')->insertGetId(['Name' => $tag]);
                 $qr = DB::table('cms_tags')->insert(['CmsID' => $CmsID, 'TagID' => $tags_id]);
@@ -120,40 +149,45 @@ class AdminController extends Controller
         return true;
     }
 
-
-
-    function cmsJson(){
+    public function cmsJson()
+    {
         $db = DB::table('cms')->select('Place')->where('CmsID', 1123)->first();
         dd($db->Place);
     }
-    function encodePlace($placeIn){
+    public function encodePlace($placeIn)
+    {
         $placeOut = array();
-        foreach($placeIn as $place){
+        foreach ($placeIn as $place) {
             array_push($placeOut, $place);
         }
         return json_encode($placeOut);
     }
-    function decodePlace($jsonIn){
+    public function decodePlace($jsonIn)
+    {
         $placeIn = json_decode($jsonIn);
         return $placeIn;
     }
-    function decodePlaceQuery($qrs){
-        foreach($qrs as $key => $qr){
+    public function decodePlaceQuery($qrs)
+    {
+        foreach ($qrs as $key => $qr) {
             $qr->Place = json_decode($qr->Place);
         }
         return $qrs;
     }
-    // 
-    function cmsCategoryIndex(){
+    //
+    public function cmsCategoryIndex()
+    {
         return view('admin.CmsCategory.index')->with('categories', $this->createNested($this->category))->with('simpleCategories', DB::table('cms_categories')->paginate(20));
     }
-    function cmsCategoryCreate(){
+    public function cmsCategoryCreate()
+    {
         return view('admin.CmsCategory.create');
     }
-    function categoryList(){
+    public function categoryList()
+    {
         return DB::table('cms_categories')->get();
     }
-    function createNested($categories, $ParentID = 0)
+    public function createNested($categories, $ParentID = 0)
     {
         $results = [];
         foreach ($categories as $category) {
@@ -165,7 +199,8 @@ class AdminController extends Controller
         }
         return $results;
     }
-    function cmsCategoryStore(Request $request){
+    public function cmsCategoryStore(Request $request)
+    {
         $values = [
             'Name_vi' => $request->Name_vi,
             'Name_en' => $request->Name_en,
@@ -174,15 +209,22 @@ class AdminController extends Controller
             'ParentID' => $request->CategoryID,
         ];
         $response = DB::table('cms_categories')->insert($values);
+        $this->returnMessage($response);
+        return redirect()->back();
     }
-    function cmsCategoryDelete(Request $request, $id){
+    public function cmsCategoryDelete(Request $request, $id)
+    {
         $response = DB::table('cms_categories')->where('CategoryID', $id)->delete();
+        $this->returnMessage($response);
+        return redirect()->back();
     }
-    function cmsCategoryEdit(Request $request, $id){
+    public function cmsCategoryEdit(Request $request, $id)
+    {
         $category = DB::table('cms_categories')->where('CategoryID', $id)->first();
         return view('admin.CmsCategory.update')->with('singleCategory', $category);
     }
-    function cmsCategoryUpdate(Request $request, $id){
+    public function cmsCategoryUpdate(Request $request, $id)
+    {
         $values = [
             'Name_vi' => $request->Name_vi,
             'Name_en' => $request->Name_en,
@@ -190,12 +232,17 @@ class AdminController extends Controller
             'Slug_en' => $request->Slug_en,
             'ParentID' => $request->CategoryID,
         ];
+        $response = DB::table('cms_categories')->where('CategoryID', $id)->update($values);
+        $this->returnMessage($response);
+        return redirect()->back();
     }
-    function userIndex(){
-        $users = DB::table('admin')->join('departments', 'admin.DepartmentID', '=',  'departments.DepartmentID')->paginate(20);
+    public function userIndex()
+    {
+        $users = DB::table('admin')->join('departments', 'admin.DepartmentID', '=', 'departments.DepartmentID')->paginate(20);
         return view('admin.account.index')->with('users', $users);
     }
-    function userStore(Request $request){
+    public function userStore(Request $request)
+    {
         $values = [
             'Username' => $request->Username,
             'Password' => md5('admin@123'),
@@ -203,64 +250,72 @@ class AdminController extends Controller
             'RegisterTime' => date('Y-m-d H:i:s'),
         ];
         $response = DB::table('admin')->insert($values);
+        $this->returnMessage($response);
+        return redirect()->back();
     }
-    function userEdit(Request $request, $id){;
+    public function userEdit(Request $request, $id)
+    {;
         $user = DB::table('admin')->where('UserID', $id)->first();
         return view('admin.account.edit')->with('user', $user);
     }
-    function userUpdate(Request $request, $id){
+    public function userUpdate(Request $request, $id)
+    {
         $values = [
             'DepartmentID' => $request->DepartmentID,
         ];
         $response = DB::table('admin')->where('UserID', $id)->update($values);
+        $this->returnMessage($response);
+        return redirect()->back();
     }
-    function userReset(Request $request, $id){
+    public function userReset(Request $request, $id)
+    {
         $values = [
             'Password' => md5('admin@123'),
         ];
         $response = DB::table('admin')->where('UserID', $id)->update($values);
-        var_dump($response);
+        $this->returnMessage($response);
+        return redirect()->back();
     }
-    function userDelete(Request $request, $id){
+    public function userDelete(Request $request, $id)
+    {
         $response = DB::table('admin')->where('UserID', $id)->delete();
-        var_dump($response);
+        $this->returnMessage($response);
+        return redirect()->back();
     }
 
-    function emailPage(){
+    public function emailPage()
+    {
         return view('admin.Cms.mailing');
     }
 
-    function postEmail(Request $res){
+    public function postEmail(Request $res)
+    {
 
-        if($res->emailtitle == null || $res->emailcontent == null)
-        {
+        if ($res->emailtitle == null || $res->emailcontent == null) {
 
-            return view('admin.Cms.mailing')->with('errorNotify' , "Bạn chưa nhập đủ nội dung!!!");
-           
-        }
-        else {
- 
+            return view('admin.Cms.mailing')->with('errorNotify', "Bạn chưa nhập đủ nội dung!!!");
+
+        } else {
+
             $mailingList = DB::table('mailinglist')->get();
-            foreach ($mailingList as $item){
-                Mail::send([], [], function($message) use ($item,$res) {
+            foreach ($mailingList as $item) {
+                Mail::send([], [], function ($message) use ($item, $res) {
                     $message->to($item->email);
                     $message->subject($res->emailtitle);
                     $message->setBody($res->emailcontent, 'text/html');
                 });
             }
 
-
-            return view('admin.Cms.mailing')->with('successNotify' , "Đã gửi thành công!!!");
+            return view('admin.Cms.mailing')->with('successNotify', "Đã gửi thành công!!!");
         }
 
     }
 
-    function getEmailList(){
+    public function getEmailList()
+    {
         $mailList = DB::table('mailinglist')->get();
 
-        return view('admin.Cms.mailinglist' , compact('mailList'));
+        return view('admin.Cms.mailinglist', compact('mailList'));
     }
-
-
 
 }

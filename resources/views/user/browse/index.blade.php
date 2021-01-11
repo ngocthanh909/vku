@@ -61,5 +61,12 @@
 .pagination {
    justify-content: center;
 }
+.page-item.active .page-link  {
+    background-color: #d90905 !important;
+    color: white;
+}
+.page-item a {
+    color: red;
+}
 </style>
 @endsection

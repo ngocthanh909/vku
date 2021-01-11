@@ -74,6 +74,9 @@
                                         <a href="#confirmDelete" class="btn btn-danger btn-circle btn-sm" data-toggle="modal" data-delete="{{route('admin.cms.delete', ['id' => $cms->CmsID])}}">
                                             <i class="fas fa-trash"></i>
                                         </a>
+                                        <a href="{{route('postView', ['slug' => $cms->Slug_vi])}}" class="btn btn-success btn-circle btn-sm" data-delete="{{route('admin.cms.delete', ['id' => $cms->CmsID])}}" target="_blank">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -83,7 +86,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12 col-md-5">
-                        <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
+                        <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Hiển thị kết quả từ {{$cmss->firstItem()}} tới {{$cmss->lastItem()}} của {{$cmss->total()}} kết quả</div>
                     </div>
                     <div class="col-sm-12 col-md-7">
                         <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">

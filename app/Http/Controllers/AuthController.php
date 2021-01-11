@@ -13,13 +13,13 @@ class AuthController extends Controller
             'Password'=> $request->Password,
         ];
         $response = DB::table('admin')->where('Username', '=', $request->Username)->where('Password', '=', md5($request->Password))->first();
-        // dd($response);
         if($response != null) {
             session([
                 'code' => 1,
                 'msg' => "Đăng nhập thành công",
                 'logged_in' => true,
-                'admin_info' => ['id' => $request->UserID, 'name' => $request->Name],
+                'role' => $response->DepartmentID,
+                'admin_info' => ['id' => $response->UserID, 'name' => $response->Username],
             ]);
             return redirect(route('admin.dashboard'));
         } else {

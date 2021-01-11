@@ -24,7 +24,6 @@ class UserController extends Controller
     function getDepartments(){
         return DB::table('departments')->get();
     }
-    
     function index(){
         $query="%$this->department%";
         // echo $query;
@@ -52,6 +51,15 @@ class UserController extends Controller
         $breadcrumb = DB::table('cms_categories')->where('Slug_vi', $slug)->first();
         return view('user.browse.index')->with('allNews', $allNews)->with('headnews', $headnews)->with('breadcrumb', $breadcrumb);
     }
+    // Subscribe
+    function subscribe(Request $request){
+        $query = DB::table('mailinglist')->insert(['email' => $request->email]);
+        if($query){
+            return (['code' => 1, 'msg' => "Đăng kí thành công!"]);
+        } else {
+            return (['code' => 0, 'msg' => "Bạn đã đắng kí nhận tin tức rồi!"]);
+        }
+    }
 
     function crawler(){
         $listQuereFile = DB::table('cms')->where('Avatar','!=', '' )->get();
@@ -77,16 +85,6 @@ class UserController extends Controller
         }
         return $results;
     }
-    // Rescusive CMS
-    // function rescusiveCms($structred_categories){
-    //     foreach($structred_categories as $structred_category){
-    //         array_push($this->result, $structred_category->CategoryID);
-    //         var_dump($this->result);
-    //         if(!empty($structred_category->child)){
-    //             $this->rescusiveCms($structred_category->child);
-    //         }
-    //     }
-    // }
     public $fullList = array();
     function rescusiveCms($structred_categories, $result){
         // dd($structred_categories);
@@ -161,4 +159,5 @@ class UserController extends Controller
         $posts = DB::table('tags')->join('cms_tags', 'tags.TagID', '=', 'cms_tags.TagID')->join('cms', 'cms_tags.CmsID', '=', 'cms.CmsID')->where('Place', 'LIKE', '%2%')->where('tags.Name', $tag)->get();
         return view('cse.browse.tags')->with('posts', $posts);
     }
+
 }

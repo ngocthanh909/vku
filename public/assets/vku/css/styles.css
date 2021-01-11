@@ -427,3 +427,37 @@ a:hover {
     text-align: justify;
     text-indent: 10px;
 }
+.footer-wrapper {
+    background-color: #fff;
+    padding: 2rem;
+}
+.footer-block1 {
+
+}
+.footer-block1-title {
+    display: block;
+    font-size: 20px;
+    font-weight: 600;
+}
+.footer-block1-place {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+}
+.footer-block1-phone {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 14px;
+    font-weight: 500;
+}
+.footer-block1-title {
+    display: block;
+    font-size: 20px;
+    font-weight: 600;
+}
+.footer-block {
+    
+}
+.footer-block3 {
+    
+}

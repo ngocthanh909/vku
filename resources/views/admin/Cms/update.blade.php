@@ -55,7 +55,6 @@
                 </div>
                 <div class="card-body">
                     <!-- Textarea -->
-                    <input class="email-title">
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="Content_vi">Nội dung</label>
                         
