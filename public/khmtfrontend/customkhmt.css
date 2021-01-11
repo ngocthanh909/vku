@@ -1,0 +1,281 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.navbar {
+    background-color: white;
+}
+
+.navbar-onscroll{
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.1);
+}
+
+.navbar-brand img {
+    transition: 0.3s;
+}
+
+.navbar-onscroll .navbar-brand img{
+    width: 100px;
+}
+.nav-item {
+    padding-right: 10px;
+}
+
+.nav-item a {
+    color: black !important;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.nav-link {
+    text-transform: uppercase;
+}
+
+.dropdown-menu {
+    border-top: 3px solid blue;
+    width: 240px;
+}
+
+.dropdown-item {
+    font-weight: 600 !important;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.dropdown-item:last-child {
+    border-bottom: 0;
+}
+
+.dropdown-menu .dropdown-item {
+    padding-left: 10px !important;
+    transition: 0.3s;
+}
+
+.dropdown-menu .dropdown-item:hover {
+   
+    padding-left: 20px !important;
+    transition: 0.3s;
+}
+.dropdown-menu .dropdown-item:not(:hover) {
+    padding-left: 0px;
+    transition: 0.3s;
+}
+
+
+
+.dropdown-item {
+   padding: 10px;
+}
+@media only screen and (max-width: 600px) {
+    .navbar-brand img{
+        width: 100px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .dropdown-menu {
+        border: 0;
+        width: 100%;
+    }
+    .submenu {
+        margin-left: 30px;
+    }
+}
+
+
+@media (min-width: 992px){
+    .dropdown-menu .dropdown-toggle:after{
+        border-top: .3em solid transparent;
+        border-right: 0;
+        border-bottom: .3em solid transparent;
+        border-left: .3em solid;
+    }
+
+    .dropdown-menu .dropdown-menu{
+        margin-left:0; margin-right: 0;
+    }
+
+    .dropdown-menu li{
+        position: relative;
+    }
+    .nav-item .submenu{ 
+        display: none;
+        position: absolute;
+        left:100%; top:-7px;
+    }
+    .nav-item .submenu-left{ 
+        right:100%; left:auto;
+    }
+
+    .dropdown-menu > li:hover{ background-color: #f1f1f1 }
+    .dropdown-menu > li:hover > .submenu{
+        display: block;
+    }   
+}
+
+.heading h2 {
+    margin-top: 60px;
+    font-weight: 300;
+    text-transform: uppercase;
+    font-size: 40px;
+}
+
+.jumbotron {
+    background: #f6f6f6;
+}
+
+.postitem {
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: white;
+}
+
+.postitem .row {
+    padding: 10px;
+}
+
+.postmeta {
+    text-align: center;
+}
+
+.postmeta .postdate {
+    font-weight: 700;
+    font-size: 32px;
+}
+
+.postmeta .postmonth {
+    white-space: nowrap;
+    font-size: 13px;
+}
+
+.post-title a {
+    text-decoration: none;
+    font-size: 18px;
+}
+
+footer {
+    background: #101010;
+    color: #cccccc;
+    font-size: 14px;
+}
+
+.footer-info .widget-title {
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.footer-info {
+    margin-top: 50px;
+}
+
+.footer-info ul{
+  list-style-type: none;
+  padding: 0;
+}
+
+.footer-info li{
+    padding-bottom : 20px;
+}
+
+.post-content .post-title {
+    font-size: 30px;
+    text-transform: uppercase;
+}
+
+.post-content .post-description {
+    font-size: 14px;
+}
+
+.content-section {
+    margin-top: 120px;
+}
+
+.list-post {
+    
+    list-style-type: none;
+    padding: 0;
+}
+
+.list-post a {
+    color: #333333;
+    font-size: 14px;
+}
+
+.list-post small {
+    font-style: italic;
+    color: #333333;
+}
+
+.list-post li {
+    margin-bottom: 15px;
+}
+
+.page-parallax {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 259px;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+.parallax-content {
+    margin-top: auto;
+    margin: auto;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+}
+
+.parallax-content h1 {
+    font-size: 42px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: white;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: black;
+}
+
+
+.breadcrumb {
+    display:inline-block;
+}
+
+ul.breadcrumb {
+    
+    list-style: none;
+    background-color: white;
+  }
+  ul.breadcrumb li {
+      font-size: 12px;
+    display: inline;
+  }
+  ul.breadcrumb li+li:before {
+    padding: 8px;
+    color: black;
+    content: "/\00a0";
+  }
+  ul.breadcrumb li a {
+    color: black;
+    text-decoration: none;
+  }
+  ul.breadcrumb li a:hover {
+    color: black;
+    text-decoration: underline;
+}
+
+.scrollanimate {
+    opacity: 0;
+}
+
+.scrollanimate-show {
+    animation-fill-mode: forwards;
+    animation-name: scrollanimate;
+    animation-duration: 1s;
+}
+
+@keyframes scrollanimate {
+    from {opacity: 0; padding-top: 200px;}
+    to {opacity: 1; padding-top: 0;}
+}

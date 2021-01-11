@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="customkhmt.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        /// some script
+
+        // jquery ready start
+        $(document).ready(function () {
+            // jQuery code
+
+            //////////////////////// Prevent closing from click inside dropdown
+            $(document).on('click', '.dropdown-menu', function (e) {
+                e.stopPropagation();
+            });
+
+            // make it as accordion for smaller screens
+            if ($(window).width() < 992) {
+                $('.dropdown-menu a').click(function (e) {
+                    e.preventDefault();
+                    if ($(this).next('.submenu').length) {
+                        $(this).next('.submenu').toggle();
+                    }
+                    $('.dropdown').on('hide.bs.dropdown', function () {
+                        $(this).find('.submenu').hide();
+                    })
+                });
+            }
+            
+            $(window).scroll(function(){
+                
+                if($(window).scrollTop() > 100){
+                  
+                    $(".navbar").addClass("navbar-onscroll");
+                }
+                else {
+                    $(".navbar").removeClass("navbar-onscroll");
+                }
+         
+
+            })
+        }); // jquery end
+    </script>
+</head>
+
+
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="https://i.ibb.co/cgLnpBR/4-01.png" width="167px">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"> <a class="nav-link" href="#">Giới thiệu </a> </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"> Đào tạo </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" href="#"> Đại học </a>
+                                <ul class="submenu dropdown-menu">
+                                    <li><a class="dropdown-item" href="">Khoa học máy tính</a></li>
+                                    <li><a class="dropdown-item" href="">Kĩ thuật máy tính</a></li>
+                                    <ul class="submenu dropdown-menu">
+                                        <li><a class="dropdown-item" href="">Multi level 1</a></li>
+                                        <li><a class="dropdown-item" href="">Multi level 2</a></li>
+                                    </ul>
+                            </li>
+
+                        </ul>
+
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#"> Thạc sĩ </a>
+                        <ul class="submenu dropdown-menu">
+                            <li><a class="dropdown-item" href="">Khoa học máy tính</a></li>
+                            <li><a class="dropdown-item" href="">Hệ thống thông tin quản lý</a></li>
+                    </li>
+
+                </ul>
+
+                </li>
+                <li>
+                    <a class="dropdown-item" href="#"> Tiến sĩ </a>
+                </li>
+
+                </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"> Nghiên cứu </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"> Tin tức </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#"> Tin học vụ </a></li>
+                        <li><a class="dropdown-item" href="#"> Hoạt động sinh viên </a></li>
+
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"> Tra cứu </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#"> Quy định , biểu mẫu </a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"> Thực tập </a>
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"> Thực tập </a>
+                </li>
+                </ul>
+            </div>
+        </div>
+
+    </nav>
+
+    <div class="page-parallax" style="background-image:url(https://i.ibb.co/8PdKCkB/cse-default-an.png);">
+        <div class="parallax-content">
+            <h1>Thu học phí năm học 2020 - 2021</h1>
+            <ul class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Pictures</a></li>
+                <li><a href="#">Summer 15</a></li>
+                <li>Italy</li>
+            </ul>
+        </div>
+    </div>
+    <div class="container" style="margin-top: 80px;">
+        <div class="row">
+            <div class="col-md-8" style="padding: 20px">
+                <div class="row">
+                    <div class="col-auto">
+                        <div class="postmeta">
+                            <div class="postdate">07</div>
+                            <div class="postmonth">1-2021</div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="post-content">
+                            <h4 class="post-title">Thu học phí năm học 2020 - 2021</h4>
+                            <div class="post-description">
+                                <p>Chuyên mục: Tin học vụ
+                                    Quy định chung
+                                    
+                                    Học bổng khuyến khích học tập (HB.KKHT) được xét cấp cho sinh viên đại học (bằng 1) và cao đẳng thuộc hệ chính quy đại trà, bao gồm cả chương trình Kỹ sư tài năng, chương trình PFIEV. Riêng sinh viên chương trình Tiên tiến, Chất lượng cao, Liên kết quốc tế tham khảo quy định học bổng của Văn phòng Đào tạo Quốc tế.
+                                    
+                                    HB.KKHT được xét cho các học kỳ chính thức theo CTĐT: CTĐT đại học từ K.2013 trở về trước: 9 HK; CTĐT đại học từ K.2014 trở về sau: 8 HK; CTĐT cao đẳng: 6 HK, chương trình PFIEV: 10 HK, CTĐT ngành Kiến trúc: 10 HK.
+                                    
+                                    Cách xét Học bổng khuyến khích học tập
+                                    
+                                    - HB.KKHT được xét vào mỗi học kỳ chính (vào cuối học kỳ) dựa trên kết quả học tập của học kỳ trước đó (Đợt xét học bổng HK1 được dựa trên kết quả HK2 năm học trước và đợt xét học bổng HK2 được dựa trên kết quả HK1) và điểm rèn luyện của năm học trước đó.
+                                    
+                                    - HB.KKHT được xét theo thứ tự Điểm trung bình chung mở rộng (ĐTBCMR) từ cao xuống thấp (i) với các sinh viên thỏa điều kiện cần (ii):
+                                    
+                                    (i) Điều kiện cần:
+                                    
+                                    -          Số tín chỉ tích lũy ngành (TCTLN) ≥ 90% số tín chỉ của chương trình đào tạo (CTĐT) tính đến học kỳ xét học bổng.
+                                    
+                                    -          Số tín chỉ (TC) đăng ký học tối thiểu trong học kỳ là:
+                                    
+                                    o   14 TC (nếu số TC của học kỳ được thiết kế theo CTĐT ≥ 14)
+                                    
+                                    o   Số TC của học kỳ được thiết kế theo CTĐT (nếu số TC của học kỳ được thiết kế theo CTĐT < 14).
+                                    
+                                    o   10 TC (nếu SV học vượt có số TCTLN ≥ 100% số TC của CTĐT tính đến học kỳ xét học bổng).
+                                    
+                                    -          Mức tối thiểu để được xét là ĐTBCMR 7,00 và điểm rèn luyện 70. Lưu ý đây là mức tối thiểu để được xét, không phải làm mức được cấp học bổng. Để được cấp học bổng thì phải xét theo thứ tự ĐTBCMR từ cao xuống cho đến khi hết quỹ HB.KKHT.
+                                    
+                                    -          Tất cả các môn trong học kỳ chính phải có đạt:
+                                    
+                                    o   Điểm tổng kết phải ≥ 5,0 hoặc có điểm MT (miễn thi), D (Đạt) hoặc RT (Đã rút môn học). Riêng chương trình PFIEV thì không tính điểm thi lần hai (thi lại) nếu có.
+                                    
+                                    o   Nếu có môn học có điểm CT (cấm thi), VT (Vắng thi), VP (vắng thi có phép), HT (hoãn thi) hoặc KD (không đạt) thì không đủ điều kiện xét học bổng.
+                                    
+                                    -          KHÔNG bị kỷ luật từ mức khiển trách trở lên.
+                                    
+                                    (ii) ĐTBCMR được tính như sau:
+                                    
+                                    Trong đó:
+                                    
+                                    -          ĐTB1HK là điểm trung bình học kỳ tính từ kết quả các môn học có trong thời khóa biểu của học kỳ trước đó. Không tính các điểm thưởng, điểm chuyển/bảo lưu, điểm các môn học dự thính, điểm thi lần hai (thi lại) của Chương trình PFIEV. Không tính các môn học, thực tập trong học kỳ hè.
+                                    
+                                    -          ĐRL: điểm rèn luyện của năm học trước
+                                    
+                                    - HB.KKHT được xét theo khóa – nhóm ngành (khi chưa phân ngành) hoặc theo khóa – ngành (khi đã phân ngành) (riêng chương trình PFIEV thì xét theo khóa) và xét theo thứ tự Điểm trung bình chung mở rộng (ĐTBCMR) từ cao xuống thấp. HB.KKHT được xét cấp cho SV theo thứ tự này cho đến khi hết quỹ HB.KKHT.
+                                    
+                                    Các mức HB.KKHT
+                                    
+                                    SV được cấp HB.KKHT học tập theo 3 mức tùy theo ĐTBCMR đạt được:
+                                    
+                                    -       Mức 24 TcHp khi đạt ĐTBCMR ≥ 9,00
+                                    
+                                    -       Mức 20 TcHp khi đạt ĐTBCMR ≥ 8,00
+                                    
+                                    -       Mức 16 TcHp khi đạt ĐTBCMR ≥ 7,00
+                                    
+                                    Các quy định về các loại điểm trung bình
+                                    
+                                       ĐTB1HK là điểm trung bình học kỳ với các quy định sau:
+                                    
+                                    -       Chỉ tính kết quả đánh giá lần đầu, không tính điểm thi lần hai (nếu có).
+                                    
+                                    -       Không tính các điểm thưởng.
+                                    
+                                    -       Không tính điểm các môn học được chuyển từ học kỳ phụ (dự thính).
+                                    
+                                    
+                                    Hướng dẫn cho sinh viên
+                                    
+                                    - Sinh viên không cần nộp đơn xét học bổng
+                                    
+                                    - Vào cuối học kỳ, Phòng Đào tạo công bố ĐTBCMR (của học kỳ trước) của các sinh viên thỏa điều kiện cần. Sinh viên xem tại myBK >> Thông tin sinh viên >> Bảng điểm và công bố Danh sách dự kiến cấp học bổng khuyến khích học tậptại Trang web Phòng Đào tạo (aao.hcmut.edu.vn) >> Sinh viên >> Học vụ >> Học bổng >> Thông báo và danh sách nhận học bổng
+                                    
+                                    - Nếu có thắc mắc về Điểm rèn luyện: Sinh viên liên hệ Văn phòng Đoàn Khoa và Phòng Công tác – Chính trị - Sinh viên
+                                    
+                                    - Nếu có thắc mắc về ĐTB1HK, số TCTL: Sinh viên liên hệ nộp đơn tại Phòng Đào tạo (CS1 – Dãy A1 - Phòng 101 và CS2 – Dãy H1 Phòng 107)
+                                    
+                                    Thời hạn nộp đơn: từ 09/12/2020 đến trước 16 giờ ngày 11/12/2020
+                                    
+                                    - Phòng Đào tạo công bố Danh sách chính thức cấp học bổng khuyến khích học tập tại Trang web Phòng Đào tạo (aao.hcmut.edu.vn) >> Sinh viên >> Học vụ >> Học bổng >> Thông báo và danh sách nhận học bổng
+                                    
+                                    - Sinh viên phải kiểm tra số CMND và số tài khoản cá nhân mở tại ngân hàng Phương Đông (OCB) trên hệ thống BKPay >> Thông tin cá nhân. Phải đảm bảo đã nhập đầy đủ và đúng để được chuyển tiền. Các trường hợp không có thông tin hoặc không chính xác sẽ không chuyển được tiền.
+                                    
+                                    Thời hạn cập nhật  trước ngày 11/12/2020
+                                    
+                                    - Phòng Kế hoạch-Tài chính chuyển khoản vào tài khoản cá nhân của sinh viên.</p>
+                            </div>
+       
+                        </div>
+                  
+                    </div>
+                </div>
+          
+            </div>
+            <div class="col-md-4" style="padding: 20px; background-color: #fbfbfb;">
+                <h4 class="widget-title" style="font-size: 18px; font-weight: 600;"> TIN CÙNG CHUYÊN MỤC</h4>
+                <p>________</p>
+                <ul class="list-post">
+                    <li>
+                        <a href="/tin-tuc/thu-hoc-phi-nam-hoc-2020-2021">Thu học phí năm học 2020 - 2021</a>
+                        <br>
+                        <small>7-01-2021</small>
+                    </li>
+                    <li>
+                        <a href="/tin-tuc/thu-hoc-phi-nam-hoc-2020-2021">Thu học phí năm học 2020 - 2021</a>
+                        <br>
+                        <small>7-01-2021</small>
+                    </li>
+                </ul>
+              
+            </div>
+           
+        </div>
+    </div>
+
+</body>
+
+<footer>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div style="width: 70%; margin-left: auto; margin-right: auto;">
+                    <img src="https://i.ibb.co/CbLz1Q0/full-cse-logo.png" style="width: 100%">
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="footer-info">
+                    <h4 class="widget-title" > LIÊN HỆ</h4>
+                    <ul>
+                        <li><i class="fa fa-map-marker"></i><strong>Địa chỉ: </strong>Tòa nhà A3, trường Đại học Bách
+                            Khoa - ĐHQG-HCM, 268 Lý Thường Kiệt, phường 14, quận 10, Tp. Hồ Chí Minh</li>
+                        <li><i class="fa fa-phone"></i><strong>Số điện thoại: </strong>(84.8) 38.647.256 - ext: 5847
+                        </li>
+                        <li><i class="fa fa-envelope"></i><strong>Email: </strong><a
+                                href="mailto:kkhktmt@hcmut.edu.vn">kkhktmt@hcmut.edu.vn</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <hr style="background: #282828">
+    <div class="text-center" style="padding-bottom: 20px">
+        © 2020 - BẢN QUYỀN THUỘC VỀ KHOA KHOA HỌC VÀ KỸ THUẬT MÁY TÍNH
+
+    </div>
+
+</footer>
+
+</html>
