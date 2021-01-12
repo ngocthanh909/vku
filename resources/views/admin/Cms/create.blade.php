@@ -107,17 +107,27 @@
                         </div>
                     </div>
                     <div class="form-group">
-                    <label class="col-md-4 control-label" for="Place">Ghim bài viết</label>
-                    <div class="col-12">
-                        <div class="checkbox">
-                            <input type="radio" name="Pin" id="" value="1"> Ghim
-                            <input type="radio" name="Pin" id="" value="0" checked> Bỏ ghim
-                            </label>
+                        <label class="col-md-4 control-label" for="Place">Ghim bài viết</label>
+                        <div class="col-12">
+                            <div class="checkbox">
+                                <input type="radio" name="Pin" id="" value="1"> Ghim
+                                <input type="radio" name="Pin" id="" value="0" checked> Bỏ ghim
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="Place">Banner</label>
+                        <div class="col-12">
+                            <div class="checkbox">
+                                <input type="radio" name="Banner" id="" value="1"> Đặt
+                                <input type="radio" name="Banner" id="" value="0" checked> Không đặt
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
-                </div>
-                
+
             </div>
         </div>
         <div class="col-lg-4">

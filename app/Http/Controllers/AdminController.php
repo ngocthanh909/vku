@@ -78,6 +78,7 @@ class AdminController extends Controller
             "Tags" => $request->Tags,
             "PostTime" => date('Y-m-d H:i:s'),
             "Pin" => $request->Pin,
+            "Banner" => $request->Banner,
         ];
         $insertedRow = DB::table('cms')->insertGetId($values);
         if ($insertedRow != null && $insertedRow != 0) {
@@ -111,6 +112,7 @@ class AdminController extends Controller
             "Tags" => $request->Tags,
             "UpdateTime" => date('Y-m-d H:i:s'),
             "Pin" => $request->Pin,
+            "Banner" => $request->Banner,
         ];
         if ($request->File('Avatar') != null) {
             $values["Avatar"] = $this->fileUpload($request, 'Avatar', 'PostImage', date('m-d-Y_hia'));

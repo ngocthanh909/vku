@@ -29,9 +29,10 @@ class UserController extends Controller
         // echo $query;
         $headnews = DB::table('cms')->where('Pin', 1)->where('Place', 'LIKE', $query)->limit(5)->get();
         $othernews = DB::table('cms')->where('Place', 'LIKE', $query)->limit(5)->orderBy('PostTime', 'desc')->get();
-        $carousel = DB::table('cms')->where('Event', 1)->where('Place', 'LIKE', $query)->limit(5)->get();
+        $banners = DB::table('cms')->where('Banner', 1)->where('Place', 'LIKE', '%1%')->get();
+        // dd($banners);
         $annous = DB::table('cms')->where('Place', 'LIKE', $query)->limit(10)->get();
-        return view('user.Index.index')->with('sub', $this->department)->with('headnews', $headnews)->with('othernews', $othernews)->with('annous', $annous)->with('carousel', $carousel);
+        return view('user.Index.index')->with('sub', $this->department)->with('headnews', $headnews)->with('othernews', $othernews)->with('annous', $annous)->with('banners', $banners);
 
     }
     // Show post

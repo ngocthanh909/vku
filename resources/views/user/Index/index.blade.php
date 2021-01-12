@@ -1,11 +1,7 @@
 @extends('user.layout.master')
 @section('title', 'Trang chủ')
 @section('body')
-<div class="row">
-    <div class="col-12">
-        @include('user.Index.carousel')
-    </div>
-</div>
+@include('user.Index.carousel')
 <div class="row">
     {{-- Tin tức sự kiện --}}
     <div class="col-md-5">

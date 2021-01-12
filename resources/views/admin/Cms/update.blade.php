@@ -126,6 +126,21 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="Place">Banner</label>
+                        <div class="col-12">
+                            <div class="checkbox">
+                                @if($cms->Pin)
+                                <input type="radio" name="Banner" id="" value="1" checked="checked"> Đặt
+                                <input type="radio" name="Banner" id="" value="0"> Không
+                                @else
+                                <input type="radio" name="Banner" id="" value="1"> Đặt
+                                <input type="radio" name="Banner" id="" value="0"  checked="checked"> Không
+                                @endif
+                                </label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

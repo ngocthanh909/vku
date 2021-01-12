@@ -1,10 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 /* 
     Global CSS
     Color: red: #d90905 blue #011b67 yellow #f89f3f
         
 */
+* {
+    
+}
 body {
     background-color: #f7f8fc;
+    font-family: 'Quicksand', sans-serif;
 }
 
 a {
@@ -12,6 +17,7 @@ a {
     cursor: pointer;
     text-decoration: none;
     transition: none 86ms ease-out;
+    font-family: 'Quicksand', sans-serif;
 }
 
 ul {
@@ -459,5 +465,9 @@ a:hover {
     
 }
 .footer-block3 {
+    
+}
+/* Carousel title */
+.carousel-title {
     
 }

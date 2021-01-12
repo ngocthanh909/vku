@@ -67,6 +67,7 @@ Route::domain('vkudemo.test')->group(function () {
     Route::get('/baiviet/{slug}', [User::class, 'postView'])->name('postView');
     Route::get('/tags/{tag}', [User::class, 'tagsBrowse'])->name('tagsView');
     Route::post('/subscribe', [User::class, 'subscribe'])->name('subscribe');
+    Route::get('/loadbai/{slug}', [User::class, 'loadbai']);
 });
 
 

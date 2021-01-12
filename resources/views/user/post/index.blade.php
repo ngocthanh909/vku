@@ -24,7 +24,7 @@
                 <i class="fas fa-calendar-week"></i> Ngày đăng: {{date('M-d-Y',strtotime($post->PostTime))}} <i class="fas fa-compass ml-3"></i> Danh mục: {{$post->Name_vi}}
             </div>
             <div class="post-time">
-                
+                <div class="fb-share-button" data-href="{{url()->current()}}" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fvkudemo.tk%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Chia sẻ</a></div>
             </div>
             <div class="content">
                 @php
@@ -35,10 +35,11 @@
             <div class="hashtag-wrapper">
                 <ul class="hashtag-list">
                     @foreach($tags as $key => $tag)
-                        <li class="hashtag-item"><a href="{{route('tagsView', ['tag' => $tag->Name])}}">{{$tag->Name}}</a></li>
+                    <li class="hashtag-item"><a href="{{route('tagsView', ['tag' => $tag->Name])}}">{{$tag->Name}}</a></li>
                     @endforeach
                 </ul>
             </div>
+            <div class="row"><div class="col"><div class="fb-comments" data-href="{{url()->current()}}" data-width="a" data-numposts="5"></div></div></div>
         </div>
     </div>
     <div class="col-md-3">
@@ -61,4 +62,6 @@
 </div>
 @endsection
 @section('custom_js')
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v9.0&appId=947748449088802&autoLogAppEvents=1" nonce="TOcaw6J4"></script>
 @endsection
