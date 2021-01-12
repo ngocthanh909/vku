@@ -38,12 +38,15 @@ class AdminController extends Controller
         }
     }
     public function adminDashboard()
-    {
-        return view('admin.dashboard.index');
+    {   
+        $totalPost = DB::table('cms')->count('CmsID');
+        $monthPost = DB::table('cms')->whereRaw('Month(PostTime) = ' . date('m'))->count('CmsID');
+        $yourPost = DB::table('cms')->where('Author', session('admin_info')['id'])->count('CmsID');
+        return view('admin.dashboard.index')->with('totalPost', $totalPost)->with('monthPost', $monthPost)->with('yourPost', $yourPost);
     }
     public function cmsIndex()
     {
-        $qr = DB::table('cms')->orderBy('PostTime', 'DESC')->paginate(20);
+        $qr = DB::table('cms')->join('admin', 'cms.Author', '=', 'admin.UserID')->orderBy('PostTime', 'DESC')->paginate(20);
         $qr->Place = $this->decodePlaceQuery($qr);
         return view('admin.Cms.index')->with('cmss', $qr);
     }

@@ -39,7 +39,7 @@
                     @endforeach
                 </ul>
             </div>
-            <div class="row"><div class="col"><div class="fb-comments" data-href="{{url()->current()}}" data-width="a" data-numposts="5"></div></div></div>
+            <div class="row"><div class="col"><div class="fb-comments" data-href="{{url()->current()}}" data-width="auto" data-numposts="5"></div></div></div>
         </div>
     </div>
     <div class="col-md-3">

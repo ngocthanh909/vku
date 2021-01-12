@@ -3,7 +3,7 @@
 @section('body')
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Danh sách bài viết</h6>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -38,6 +38,7 @@
                                     <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 119px;">Tên bài viết</th>
                                     <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 57px;">Vị trí</th>
                                     <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 31px;">Thời gian</th>
+                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 31px;">Tác giả</th>
                                     <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 67px;">Thao tác</th>
                                 </tr>
                             </thead>
@@ -47,6 +48,7 @@
                                     <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 119px;">Tên bài viết</th>
                                     <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 57px;">Vị trí</th>
                                     <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 31px;">Thời gian</th>
+                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 31px;">Tác giả</th>
                                     <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 67px;">Thao tác</th>
                                 </tr>
                             </tfoot>
@@ -67,6 +69,7 @@
                                         @endforeach
                                         @endforeach</td>
                                     <td>{{$cms->PostTime}}</td>
+                                    <td>{{$cms->Username}}</td>
                                     <td>
                                         <a href="{{route('admin.cms.edit', ['id' => $cms->CmsID])}}" class="btn btn-primary btn-circle btn-sm">
                                             <i class="fas fa-edit"></i>
@@ -107,15 +110,15 @@
                 <div class="icon-box">
                     <i class="material-icons">&#xE5CD;</i>
                 </div>
-                <h4 class="modal-title w-100">Mày chắc chưa</h4>
+                <h4 class="modal-title w-100">Bạn chắc chưa</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
-                <p>Xoá một cái là đéo recover được đâu con.</p>
+                <p>Thao tác của bạn không thể hoàn tác</p>
             </div>
             <div class="modal-footer justify-content-center">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-				<button id="confirm" class="btn btn-danger" onclick="">Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>
+				<button id="confirm" class="btn btn-danger" onclick="">Xác nhận</button>
             </div>
         </div>
     </div>

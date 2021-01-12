@@ -5,7 +5,7 @@
     <div class="col-lg-8">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Quản lý danh mục</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Danh sách danh mục</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -64,6 +64,9 @@
                                                 <a href="#confirmDelete" class="btn btn-danger btn-circle btn-sm" data-toggle="modal" data-delete="{{route('admin.cmscategory.delete', ['id' => $category->CategoryID])}}">
                                                     <i class="fas fa-trash"></i>
                                                 </a>
+                                                 <a href="{{route('postBrowse', ['slug' => $category->Slug_vi])}}" class="btn btn-success btn-circle btn-sm" target="_blank">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -115,15 +118,15 @@
                 <div class="icon-box">
                     <i class="material-icons">&#xE5CD;</i>
                 </div>
-                <h4 class="modal-title w-100">Mày chắc chưa</h4>
+                <h4 class="modal-title w-100">Bạn chắc chưa</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
-                <p>Xoá một cái là đéo recover được đâu con.</p>
+                <p>Bạn không thể hoàn tác sau khi xoá</p>
             </div>
             <div class="modal-footer justify-content-center">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button id="confirm" class="btn btn-danger" onclick="">Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>
+                <button id="confirm" class="btn btn-danger" onclick="">Xác nhận</button>
             </div>
         </div>
     </div>
